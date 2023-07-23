@@ -6,45 +6,63 @@ int main()
     //push_back(&stack, 123, 0, 0);
     //int type_t = 0;
     char str[1000] = {0};
+    char new_str[1000] = {0};
     scanf("%s", str);
+    new_parsing_str(str, new_str);
+    printf("%s\n", new_str);
+    //int flag_error = lixem_parsing(&stack, str);
 
-    int flag_error = lixem_parsing(&stack, str);
 
 
+    // if (flag_error == FAILURE) printf("FAILURE\n");
+    // else printf("SUCCESS\n");
 
-    if (flag_error == FAILURE) printf("FAILURE\n");
-    else printf("SUCCESS\n");
+    // if(stack == NULL) printf("NUUUUULLLLLLL\n");
 
-    if(stack == NULL) printf("NUUUUULLLLLLL\n");
-    // printf("%d\n", pop_back_op(&stack));
-    // printf("%lf\n", pop_back_val(&stack));
-    // printf("%d\n", pop_back_op(&stack));
-    // printf("%lf\n", pop_back_val(&stack));
-    // printf("%d\n", pop_back_op(&stack));
+    // while (stack != NULL)
+    // {
+    //     if(stack -> type == NUMBER) printf("%lf", pop_back_val(&stack));
+    //     else if(stack -> type == PRNTS_OPEN) printf("( - %d", pop_back_op(&stack));
+    //     else if(stack -> type == PRNTS_CLOSE) printf(") - %d", pop_back_op(&stack));
+    //     else if(stack -> type == PLUS) printf("+ - %d", pop_back_op(&stack));
+    //     else if(stack -> type == MINUS) printf("- - %d", pop_back_op(&stack));
+    //     else if(stack -> type == MULTI) printf("* - %d", pop_back_op(&stack));
+    //     else if(stack -> type == DIV) printf("/ - %d", pop_back_op(&stack));
+    //     else if(stack -> type == MOD) printf("mod - %d", pop_back_op(&stack));
+    //     else if(stack -> type == POW) printf("^ - %d", pop_back_op(&stack));
+    //     else if(stack -> type == SIN) printf("sin - %d", pop_back_op(&stack));
+    //     else if(stack -> type == COS) printf("cos - %d", pop_back_op(&stack));
+    //     else if(stack -> type == SQRT) printf("sqrt - %d", pop_back_op(&stack));
+    //     else if(stack -> type == TAN) printf("tan - %d", pop_back_op(&stack));
+    //     else if(stack -> type == LN) printf("ln - %d", pop_back_op(&stack));
+    //     else if(stack -> type == LOG) printf("log - %d", pop_back_op(&stack));
+    //     else if(stack -> type == ASIN) printf("asin - %d", pop_back_op(&stack));
+    //     else if(stack -> type == ACOS) printf("acos - %d", pop_back_op(&stack));
+    //     else if(stack -> type == ATAN) printf("atan - %d", pop_back_op(&stack));
+    //     printf("\n");
+    //     //stack = stack -> next;
+    // }
+}
 
-    while (stack != NULL)
+void new_parsing_str(char *str, char *new_str)
+{
+    int index = 0;
+    for (int i = 0; i < strlen(str); i++)
     {
-        if(stack -> type == NUMBER) printf("%lf", pop_back_val(&stack));
-        else if(stack -> type == PRNTS_OPEN) printf("( - %d", pop_back_op(&stack));
-        else if(stack -> type == PRNTS_CLOSE) printf(") - %d", pop_back_op(&stack));
-        else if(stack -> type == PLUS) printf("+ - %d", pop_back_op(&stack));
-        else if(stack -> type == MINUS) printf("- - %d", pop_back_op(&stack));
-        else if(stack -> type == MULTI) printf("* - %d", pop_back_op(&stack));
-        else if(stack -> type == DIV) printf("/ - %d", pop_back_op(&stack));
-        else if(stack -> type == MOD) printf("mod - %d", pop_back_op(&stack));
-        else if(stack -> type == POW) printf("^ - %d", pop_back_op(&stack));
-        else if(stack -> type == SIN) printf("sin - %d", pop_back_op(&stack));
-        else if(stack -> type == COS) printf("cos - %d", pop_back_op(&stack));
-        else if(stack -> type == SQRT) printf("sqrt - %d", pop_back_op(&stack));
-        else if(stack -> type == TAN) printf("tan - %d", pop_back_op(&stack));
-        else if(stack -> type == LN) printf("ln - %d", pop_back_op(&stack));
-        else if(stack -> type == LOG) printf("log - %d", pop_back_op(&stack));
-        else if(stack -> type == ASIN) printf("asin - %d", pop_back_op(&stack));
-        else if(stack -> type == ACOS) printf("acos - %d", pop_back_op(&stack));
-        else if(stack -> type == ATAN) printf("atan - %d", pop_back_op(&stack));
-        printf("\n");
-        //stack = stack -> next;
+        if(str[0] == '-' && i == 0)
+        {
+            new_str[index++] = '0';
+            new_str[index++] = str[i];
+        }
+        else if(str[i] == '(' && str[i + 1] == '-')
+        {
+            new_str[index++] = str[i];
+            new_str[index++] = '0';
+        }
+        else new_str[index++] = str[i];
+
     }
+
 }
 
 int lixem_parsing(struct Data **stack, char *str)

@@ -38,7 +38,7 @@ struct Data
     struct Data *next;
 };
 
-
+void new_parsing_str(char *str, char *new_str);
 int lixem_parsing(struct Data **stack, char *str);
 void push_back(struct Data **ptr, double Data, int type_t, int priority_t);
 double pop_back_val(struct Data **ptr);
