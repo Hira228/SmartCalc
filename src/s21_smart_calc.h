@@ -52,5 +52,5 @@ int check_tan_function(char *str, int *i);
 int check_log_functions(char *str, int *i);
 int check_a_functions(char *str, int *i);
 void print_stack(struct Data *ptr);
-char peek_stack_priority(struct Data *ptr);
+int peek_stack_priority(struct Data *ptr);
 int stack_is_empty(struct Data *ptr);

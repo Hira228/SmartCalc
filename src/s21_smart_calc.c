@@ -3,6 +3,9 @@
 int main()
 {
     struct Data *stack = NULL;
+    struct Data *reverse_stack = NULL;
+    struct Data *stack_polish_notation = NULL;
+    struct Data *stack_operator = NULL;
     //push_back(&stack, 123, 0, 0);
     //int type_t = 0;
     char str[1000] = {0};
@@ -10,38 +13,96 @@ int main()
     scanf("%s", str);
     new_parsing_str(str, new_str);
     printf("%s\n", new_str);
-    //int flag_error = lixem_parsing(&stack, str);
+    int flag_error = lixem_parsing(&stack, new_str);
+    
+    while (!stack_is_empty(stack))
+    {
+        struct Data *temp = stack;
+        push_back(&reverse_stack, temp -> value, temp -> type, temp -> priority);
+        stack = temp -> next;
+        free(temp);
+    }
+    
+    while(!stack_is_empty(reverse_stack))
+    {
+        struct Data *temp = reverse_stack;
+        if(temp -> type == NUMBER) push_back(&stack_polish_notation, temp -> value, temp -> type, temp -> priority);
+        
+        else if(temp -> type != NUMBER && temp -> type != PRNTS_OPEN && temp -> type != PRNTS_CLOSE)
+        {
+            while(!stack_is_empty(stack_operator) && peek_stack_priority(stack_operator) >= temp -> priority && stack_operator -> type != PRNTS_OPEN)
+            {
+                struct Data *temp_op = stack_operator;
+                push_back(&stack_polish_notation, temp_op -> value, temp_op -> type, temp_op -> priority);
+                stack_operator = temp_op -> next;
+                free(temp_op);
+            }
+            push_back(&stack_operator, temp -> value, temp -> type, temp -> priority);
+        }
 
+        else if(temp -> type == PRNTS_OPEN) push_back(&stack_operator, temp -> value, temp -> type, temp -> priority);
+
+        else if(temp -> type == PRNTS_CLOSE)
+        {
+            while(!stack_is_empty(stack_operator) && stack_operator -> type != PRNTS_OPEN)
+            {
+                struct Data *temp_op = stack_operator;
+                push_back(&stack_polish_notation, temp_op -> value, temp_op -> type, temp_op -> priority);
+                stack_operator = temp_op -> next;
+                free(temp_op);
+            }
+            struct Data *temp_op_open = stack_operator;
+            if(!stack_is_empty(stack_operator) && stack_operator -> type == PRNTS_OPEN)
+            {
+                struct Data *temp_op_open = stack_operator;
+                stack_operator = temp_op_open -> next;
+                free(temp_op_open);
+            }
+        }
+        reverse_stack = temp -> next;
+        free(temp);
+    }
+
+    while (!stack_is_empty(stack_operator))
+    {
+        struct Data *temp = stack_operator;
+        push_back(&stack_polish_notation, temp -> value, temp -> type, temp -> priority);
+        stack_operator = temp -> next;
+        free(temp);
+    }
+    
 
 
     // if (flag_error == FAILURE) printf("FAILURE\n");
     // else printf("SUCCESS\n");
 
-    // if(stack == NULL) printf("NUUUUULLLLLLL\n");
+    
 
-    // while (stack != NULL)
-    // {
-    //     if(stack -> type == NUMBER) printf("%lf", pop_back_val(&stack));
-    //     else if(stack -> type == PRNTS_OPEN) printf("( - %d", pop_back_op(&stack));
-    //     else if(stack -> type == PRNTS_CLOSE) printf(") - %d", pop_back_op(&stack));
-    //     else if(stack -> type == PLUS) printf("+ - %d", pop_back_op(&stack));
-    //     else if(stack -> type == MINUS) printf("- - %d", pop_back_op(&stack));
-    //     else if(stack -> type == MULTI) printf("* - %d", pop_back_op(&stack));
-    //     else if(stack -> type == DIV) printf("/ - %d", pop_back_op(&stack));
-    //     else if(stack -> type == MOD) printf("mod - %d", pop_back_op(&stack));
-    //     else if(stack -> type == POW) printf("^ - %d", pop_back_op(&stack));
-    //     else if(stack -> type == SIN) printf("sin - %d", pop_back_op(&stack));
-    //     else if(stack -> type == COS) printf("cos - %d", pop_back_op(&stack));
-    //     else if(stack -> type == SQRT) printf("sqrt - %d", pop_back_op(&stack));
-    //     else if(stack -> type == TAN) printf("tan - %d", pop_back_op(&stack));
-    //     else if(stack -> type == LN) printf("ln - %d", pop_back_op(&stack));
-    //     else if(stack -> type == LOG) printf("log - %d", pop_back_op(&stack));
-    //     else if(stack -> type == ASIN) printf("asin - %d", pop_back_op(&stack));
-    //     else if(stack -> type == ACOS) printf("acos - %d", pop_back_op(&stack));
-    //     else if(stack -> type == ATAN) printf("atan - %d", pop_back_op(&stack));
-    //     printf("\n");
-    //     //stack = stack -> next;
-    // }
+//    if(stack == NULL) printf("NUUUUULLLLLLL\n");
+
+    while (stack_polish_notation != NULL)
+    {
+        if(stack_polish_notation -> type == NUMBER) printf("%lf", pop_back_val(&stack_polish_notation));
+        else if(stack_polish_notation -> type == PRNTS_OPEN) printf("( - %d", pop_back_op(&stack_polish_notation));
+        else if(stack_polish_notation -> type == PRNTS_CLOSE) printf(") - %d", pop_back_op(&stack_polish_notation));
+        else if(stack_polish_notation -> type == PLUS) printf("+ - %d", pop_back_op(&stack_polish_notation));
+        else if(stack_polish_notation -> type == MINUS) printf("- - %d", pop_back_op(&stack_polish_notation));
+        else if(stack_polish_notation -> type == MULTI) printf("* - %d", pop_back_op(&stack_polish_notation));
+        else if(stack_polish_notation -> type == DIV) printf("/ - %d", pop_back_op(&stack_polish_notation));
+        else if(stack_polish_notation -> type == MOD) printf("mod - %d", pop_back_op(&stack_polish_notation));
+        else if(stack_polish_notation -> type == POW) printf("^ - %d", pop_back_op(&stack_polish_notation));
+        else if(stack_polish_notation -> type == SIN) printf("sin - %d", pop_back_op(&stack_polish_notation));
+        else if(stack_polish_notation -> type == COS) printf("cos - %d", pop_back_op(&stack_polish_notation));
+        else if(stack_polish_notation -> type == SQRT) printf("sqrt - %d", pop_back_op(&stack_polish_notation));
+        else if(stack_polish_notation -> type == TAN) printf("tan - %d", pop_back_op(&stack_polish_notation));
+        else if(stack_polish_notation -> type == LN) printf("ln - %d", pop_back_op(&stack_polish_notation));
+        else if(stack_polish_notation -> type == LOG) printf("log - %d", pop_back_op(&stack_polish_notation));
+        else if(stack_polish_notation -> type == ASIN) printf("asin - %d", pop_back_op(&stack_polish_notation));
+        else if(stack_polish_notation -> type == ACOS) printf("acos - %d", pop_back_op(&stack_polish_notation));
+        else if(stack_polish_notation -> type == ATAN) printf("atan - %d", pop_back_op(&stack_polish_notation));
+        printf("\n");
+        //stack = stack -> next;
+    }
 }
 
 void new_parsing_str(char *str, char *new_str)
@@ -60,9 +121,7 @@ void new_parsing_str(char *str, char *new_str)
             new_str[index++] = '0';
         }
         else new_str[index++] = str[i];
-
     }
-
 }
 
 int lixem_parsing(struct Data **stack, char *str)
@@ -174,10 +233,9 @@ int stack_is_empty(struct Data *ptr)
     return  ptr == NULL;
 }
 
-char peek_stack_priority(struct Data *ptr)
+int peek_stack_priority(struct Data *ptr)
 {
-    if(!stack_is_empty(ptr)) return ptr -> value;
-    return FAILURE;
+    return ptr -> priority;
 }
 
 int pop_back_op(struct Data **ptr)
