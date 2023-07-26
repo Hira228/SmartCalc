@@ -5,6 +5,8 @@ int main()
     struct Data *stack = NULL;
     struct Data *reverse_stack = NULL;
     struct Data *stack_polish_notation = NULL;
+    struct Data *stack_reverse_polish_notation = NULL;
+    struct Data *stack_calc = NULL;
     struct Data *stack_operator = NULL;
     //push_back(&stack, 123, 0, 0);
     //int type_t = 0;
@@ -70,36 +72,133 @@ int main()
         stack_operator = temp -> next;
         free(temp);
     }
+
+    while(!stack_is_empty(stack_polish_notation))
+    {
+        struct Data *temp = stack_polish_notation;
+        push_back(&stack_reverse_polish_notation, temp -> value, temp -> type, temp -> priority);
+        stack_polish_notation = temp -> next;
+        free(temp);
+    }
     
+    while(!stack_is_empty(stack_reverse_polish_notation))
+    {
+        struct Data *temp_n = stack_reverse_polish_notation;
+
+        if(stack_reverse_polish_notation -> type == NUMBER) push_back(&stack_calc, temp_n -> value, temp_n -> type, temp_n -> priority);
+        
+        else
+        {
+            double a = pop_back_val(&stack_calc);
+
+            switch (stack_reverse_polish_notation -> type)
+            {
+            case PLUS:
+                push_back(&stack_calc, a + pop_back_val(&stack_calc), NUMBER, 0);
+                break;
+
+            case MINUS:
+                push_back(&stack_calc, pop_back_val(&stack_calc) - a, NUMBER, 0);
+                break;
+            
+            case MULTI:
+                push_back(&stack_calc, a * pop_back_val(&stack_calc), NUMBER, 0);
+                break;
+            
+            case DIV:
+                push_back(&stack_calc, pop_back_val(&stack_calc) / a, NUMBER, 0);
+                break;
+
+            case POW:
+                push_back(&stack_calc, powl(pop_back_val(&stack_calc), a), NUMBER, 0);
+                break;
+            
+            case MOD:
+                push_back(&stack_calc, fmod(pop_back_val(&stack_calc), a), NUMBER, 0);
+                break;
+            
+            case SIN:
+                push_back(&stack_calc, sin(a), NUMBER, 0);
+                break;
+            
+            case COS:
+                push_back(&stack_calc, cos(a), NUMBER, 0);
+                break;
+            
+            case SQRT:
+                push_back(&stack_calc, sqrt(a), NUMBER, 0);
+                break;
+
+            case TAN:
+                push_back(&stack_calc, tan(a), NUMBER, 0);
+                break;
+            
+            case LN:
+                push_back(&stack_calc, log(a), NUMBER, 0);
+                break;
+            
+            case LOG:
+                push_back(&stack_calc, log10(a), NUMBER, 0);
+                break;
+            
+            case ASIN:
+                push_back(&stack_calc, asin(a), NUMBER, 0);
+                break;
+
+            case ACOS:
+                push_back(&stack_calc, acos(a), NUMBER, 0);
+                break;
+            
+            case ATAN:
+                push_back(&stack_calc, atan(a), NUMBER, 0);
+                break;
+
+            default:
+                break;
+            }
+        }
+
+        stack_reverse_polish_notation = temp_n -> next;
+        free(temp_n);
+    }
+
+    printf("%lf\n", pop_back_val(&stack_calc));
+    return 0;
+    // printf("%lf\n", pop_back_val(&stack_calc));
+    // printf("%lf\n", pop_back_val(&stack_calc));
 
 
     // if (flag_error == FAILURE) printf("FAILURE\n");
     // else printf("SUCCESS\n");
 
     
-
+    // while (reverse_stack != NULL)
+    // {
+    //     if(reverse_stack -> type == NUMBER) printf("%lf\n", pop_back_val(&reverse_stack));
+    //     else if(reverse_stack -> type == MOD) printf("mod - %d\n", pop_back_op(&reverse_stack));
+    // }
 //    if(stack == NULL) printf("NUUUUULLLLLLL\n");
 
-    while (stack_polish_notation != NULL)
+    while (stack_reverse_polish_notation != NULL)
     {
-        if(stack_polish_notation -> type == NUMBER) printf("%lf", pop_back_val(&stack_polish_notation));
-        else if(stack_polish_notation -> type == PRNTS_OPEN) printf("( - %d", pop_back_op(&stack_polish_notation));
-        else if(stack_polish_notation -> type == PRNTS_CLOSE) printf(") - %d", pop_back_op(&stack_polish_notation));
-        else if(stack_polish_notation -> type == PLUS) printf("+ - %d", pop_back_op(&stack_polish_notation));
-        else if(stack_polish_notation -> type == MINUS) printf("- - %d", pop_back_op(&stack_polish_notation));
-        else if(stack_polish_notation -> type == MULTI) printf("* - %d", pop_back_op(&stack_polish_notation));
-        else if(stack_polish_notation -> type == DIV) printf("/ - %d", pop_back_op(&stack_polish_notation));
-        else if(stack_polish_notation -> type == MOD) printf("mod - %d", pop_back_op(&stack_polish_notation));
-        else if(stack_polish_notation -> type == POW) printf("^ - %d", pop_back_op(&stack_polish_notation));
-        else if(stack_polish_notation -> type == SIN) printf("sin - %d", pop_back_op(&stack_polish_notation));
-        else if(stack_polish_notation -> type == COS) printf("cos - %d", pop_back_op(&stack_polish_notation));
-        else if(stack_polish_notation -> type == SQRT) printf("sqrt - %d", pop_back_op(&stack_polish_notation));
-        else if(stack_polish_notation -> type == TAN) printf("tan - %d", pop_back_op(&stack_polish_notation));
-        else if(stack_polish_notation -> type == LN) printf("ln - %d", pop_back_op(&stack_polish_notation));
-        else if(stack_polish_notation -> type == LOG) printf("log - %d", pop_back_op(&stack_polish_notation));
-        else if(stack_polish_notation -> type == ASIN) printf("asin - %d", pop_back_op(&stack_polish_notation));
-        else if(stack_polish_notation -> type == ACOS) printf("acos - %d", pop_back_op(&stack_polish_notation));
-        else if(stack_polish_notation -> type == ATAN) printf("atan - %d", pop_back_op(&stack_polish_notation));
+        if(stack_reverse_polish_notation -> type == NUMBER) printf("%lf", pop_back_val(&stack_reverse_polish_notation));
+        else if(stack_reverse_polish_notation -> type == PRNTS_OPEN) printf("( - %d", pop_back_op(&stack_reverse_polish_notation));
+        else if(stack_reverse_polish_notation -> type == PRNTS_CLOSE) printf(") - %d", pop_back_op(&stack_reverse_polish_notation));
+        else if(stack_reverse_polish_notation -> type == PLUS) printf("+ - %d", pop_back_op(&stack_reverse_polish_notation));
+        else if(stack_reverse_polish_notation -> type == MINUS) printf("- - %d", pop_back_op(&stack_reverse_polish_notation));
+        else if(stack_reverse_polish_notation -> type == MULTI) printf("* - %d", pop_back_op(&stack_reverse_polish_notation));
+        else if(stack_reverse_polish_notation -> type == DIV) printf("/ - %d", pop_back_op(&stack_reverse_polish_notation));
+        else if(stack_reverse_polish_notation -> type == MOD) printf("mod - %d", pop_back_op(&stack_reverse_polish_notation));
+        else if(stack_reverse_polish_notation -> type == POW) printf("^ - %d", pop_back_op(&stack_reverse_polish_notation));
+        else if(stack_reverse_polish_notation -> type == SIN) printf("sin - %d", pop_back_op(&stack_reverse_polish_notation));
+        else if(stack_reverse_polish_notation -> type == COS) printf("cos - %d", pop_back_op(&stack_reverse_polish_notation));
+        else if(stack_reverse_polish_notation -> type == SQRT) printf("sqrt - %d", pop_back_op(&stack_reverse_polish_notation));
+        else if(stack_reverse_polish_notation -> type == TAN) printf("tan - %d", pop_back_op(&stack_reverse_polish_notation));
+        else if(stack_reverse_polish_notation -> type == LN) printf("ln - %d", pop_back_op(&stack_reverse_polish_notation));
+        else if(stack_reverse_polish_notation -> type == LOG) printf("log - %d", pop_back_op(&stack_reverse_polish_notation));
+        else if(stack_reverse_polish_notation -> type == ASIN) printf("asin - %d", pop_back_op(&stack_reverse_polish_notation));
+        else if(stack_reverse_polish_notation -> type == ACOS) printf("acos - %d", pop_back_op(&stack_reverse_polish_notation));
+        else if(stack_reverse_polish_notation -> type == ATAN) printf("atan - %d", pop_back_op(&stack_reverse_polish_notation));
         printf("\n");
         //stack = stack -> next;
     }
@@ -312,11 +411,11 @@ int element_definition(int c, char *str, int *i)
 int number_entry(char *str, char *number_str, int *i)
 {
     int index = 0;
-    while(element_definition(str[*i], str, i) == NUMBER || str[*i] == '.')
+    while(str[*i] >= '0' && str[*i] <= '9' || str[*i] == '.')
     {
         if(str[*i] == '.')
         {
-            if(element_definition(str[*i + 1], str, i) != NUMBER) return FAILURE;
+            if(!(str[*i + 1] >= '0' && str[*i + 1] <= '9')) return FAILURE;
         }
         number_str[index++] = str[*i];
         (*i)++;
