@@ -1,5 +1,8 @@
 #include "s21_smart_calc.h"
 
+// SUCCESS 0
+// FAILURE 1
+
 int main()
 {
     struct Data *stack = NULL;
@@ -7,46 +10,172 @@ int main()
     struct Data *stack_polish_notation = NULL;
     struct Data *stack_reverse_polish_notation = NULL;
     struct Data *stack_calc = NULL;
-    struct Data *stack_operator = NULL;
-    //push_back(&stack, 123, 0, 0);
-    //int type_t = 0;
     char str[1000] = {0};
     char new_str[1000] = {0};
-    //scanf("%s", str);
-    //gets_s(str, sizeof(str));
     fgets(str, sizeof(str), stdin);
-    //getline(&str, &l, stdin);
     new_parsing_str(str, new_str);
     printf("%s\n", new_str);
-    int flag_error = lixem_parsing(&stack, new_str);
-    if(flag_error == FAILURE)
+    
+    int flag_error = lixem_parsing(&stack, new_str);                                        // PARSING LIXEMS
+    
+    if(flag_error == FAILURE)                                                               // CHECK ERRORS
     {
-        while(!stack_is_empty(stack))
-        {
-            pop_back_val(&stack);
-        }
+        flag_error_clear(&stack, &reverse_stack, &stack_polish_notation, &stack_reverse_polish_notation, &stack_calc);
         printf("FAIL\n");
         return FAILURE;
     } 
-    
-    while (!stack_is_empty(stack))
+
+    reverse_stack_elements(&stack, &reverse_stack);                                         // REVERSE STACK
+
+    flag_error = reverse_polish_notation(&reverse_stack, &stack_polish_notation);           // RPN
+
+    if(flag_error == FAILURE)                                                               // CHECK ERRORS
     {
-        struct Data *temp = stack;
-        push_back(&reverse_stack, temp -> value, temp -> type, temp -> priority);
-        stack = temp -> next;
+        flag_error_clear(&stack, &reverse_stack, &stack_polish_notation, &stack_reverse_polish_notation, &stack_calc);
+        printf("FAIL\n");
+        return FAILURE;
+    } 
+
+    reverse_stack_elements(&stack_polish_notation, &stack_reverse_polish_notation);          // REVERSE STACK
+    
+    flag_error = calculate(&stack_reverse_polish_notation, &stack_calc);                     // CALCILATE
+    
+    if(flag_error == FAILURE)                                                                // CHECK ERRORS
+    {
+        flag_error_clear(&stack, &reverse_stack, &stack_polish_notation, &stack_reverse_polish_notation, &stack_calc);
+        printf("FAIL\n");
+        return FAILURE;
+    } 
+
+    printf("%lf\n", pop_back_val(&stack_calc));                                              // ANSWER
+}
+
+int calculate(struct Data **stack_reverse_polish_notation, struct Data **stack_calc)
+{
+    int flag_error = SUCCESS;
+
+    while(!stack_is_empty(*stack_reverse_polish_notation) && flag_error == SUCCESS)
+    {
+        struct Data *temp_n = *stack_reverse_polish_notation;
+
+        if(temp_n -> type == NUMBER) push_back(stack_calc, temp_n -> value, temp_n -> type, temp_n -> priority);
+        
+        else
+        {   
+            double a = 0;
+            if(!stack_is_empty(*stack_calc)) a = pop_back_val(stack_calc);
+            
+            else flag_error = FAILURE;
+
+            switch (temp_n -> type)
+            {
+            case PLUS:
+                if(stack_is_empty(*stack_calc)) flag_error = FAILURE;
+                else push_back(stack_calc, a + pop_back_val(stack_calc), NUMBER, 0);
+                break;
+
+            case MINUS:
+                if(stack_is_empty(*stack_calc)) flag_error = FAILURE;
+                else push_back(stack_calc, pop_back_val(stack_calc) - a, NUMBER, 0);
+                break;
+            
+            case MULTI:
+                if(stack_is_empty(*stack_calc)) flag_error = FAILURE;
+                else push_back(stack_calc, a * pop_back_val(stack_calc), NUMBER, 0);
+                break;
+            
+            case DIV:
+                if(stack_is_empty(*stack_calc) || a == 0.0f) flag_error = FAILURE;
+                else push_back(stack_calc, pop_back_val(stack_calc) / a, NUMBER, 0);
+                break;
+
+            case POW:
+                if(stack_is_empty(*stack_calc)) flag_error = FAILURE;
+                else push_back(stack_calc, powl(pop_back_val(stack_calc), a), NUMBER, 0);
+                break;
+            
+            case MOD:
+                if(stack_is_empty(*stack_calc)) flag_error = FAILURE;
+                else push_back(stack_calc, fmod(pop_back_val(stack_calc), a), NUMBER, 0);
+                break;
+            
+            case SIN:
+                if (flag_error == SUCCESS) push_back(stack_calc, sin(a), NUMBER, 0);
+                break;
+            
+            case COS:
+                if (flag_error == SUCCESS) push_back(stack_calc, cos(a), NUMBER, 0);
+                break;
+            
+            case SQRT:
+                if (flag_error != FAILURE && a >= 0.0f) push_back(stack_calc, sqrt(a), NUMBER, 0);
+                else flag_error = FAILURE;
+                break;
+
+            case TAN:
+                if (flag_error == SUCCESS) push_back(stack_calc, tan(a), NUMBER, 0);
+                break;
+            
+            case LN:
+                if (flag_error != FAILURE && a != 0.0f) push_back(stack_calc, log(a), NUMBER, 0);
+                else flag_error = FAILURE;
+                break;
+            
+            case LOG:
+                if (flag_error != FAILURE && a != 0.0f) push_back(stack_calc, log10(a), NUMBER, 0);
+                else flag_error = FAILURE;
+                break;
+            
+            case ASIN:
+                if (flag_error == SUCCESS) push_back(stack_calc, asin(a), NUMBER, 0);
+                break;
+
+            case ACOS:
+                if (flag_error == SUCCESS) push_back(stack_calc, acos(a), NUMBER, 0);
+                break;
+            
+            case ATAN:
+                if (flag_error == SUCCESS) push_back(stack_calc, atan(a), NUMBER, 0);
+                break;
+
+            default:
+                break;
+            }
+        }
+
+        *stack_reverse_polish_notation = temp_n -> next;
+        free(temp_n);
+    }
+    return flag_error;
+}
+
+void reverse_stack_elements(struct Data **stack, struct Data **reverse_stack)
+{
+    while (!stack_is_empty(*stack))
+    {
+        struct Data *temp = *stack;
+        push_back(reverse_stack, temp->value, temp->type, temp->priority);
+        *stack = temp->next;
         free(temp);
     }
-    while(!stack_is_empty(reverse_stack))
+}
+
+int reverse_polish_notation(struct Data **reverse_stack, struct Data **stack_polish_notation)
+{
+    int flag_error = SUCCESS;
+    struct Data *stack_operator = NULL;
+
+    while(!stack_is_empty(*reverse_stack) && flag_error == SUCCESS)
     {
-        struct Data *temp = reverse_stack;
-        if(temp -> type == NUMBER) push_back(&stack_polish_notation, temp -> value, temp -> type, temp -> priority);
+        struct Data *temp = *reverse_stack;
+        if(temp -> type == NUMBER) push_back(stack_polish_notation, temp -> value, temp -> type, temp -> priority);
         
         else if(temp -> type != NUMBER && temp -> type != PRNTS_OPEN && temp -> type != PRNTS_CLOSE)
         {
             while(!stack_is_empty(stack_operator) && peek_stack_priority(stack_operator) >= temp -> priority && stack_operator -> type != PRNTS_OPEN)
             {
                 struct Data *temp_op = stack_operator;
-                push_back(&stack_polish_notation, temp_op -> value, temp_op -> type, temp_op -> priority);
+                push_back(stack_polish_notation, temp_op -> value, temp_op -> type, temp_op -> priority);
                 stack_operator = temp_op -> next;
                 free(temp_op);
             }
@@ -63,7 +192,7 @@ int main()
             while(!stack_is_empty(stack_operator) && stack_operator -> type != PRNTS_OPEN)
             {
                 struct Data *temp_op = stack_operator;
-                push_back(&stack_polish_notation, temp_op -> value, temp_op -> type, temp_op -> priority);
+                push_back(stack_polish_notation, temp_op -> value, temp_op -> type, temp_op -> priority);
                 stack_operator = temp_op -> next;
                 free(temp_op);
             }
@@ -75,215 +204,59 @@ int main()
             }
             else
             {
-                if(!stack_is_empty(stack_polish_notation))
+                while(!stack_is_empty(stack_operator))
                 {
-                    while(!stack_is_empty(stack_polish_notation))
-                    {
-                        pop_back_val(&stack_polish_notation);
-                    }
+                    pop_back_op(&stack_operator);
                 }
-                if(!stack_is_empty(reverse_stack))
-                {
-                    while(!stack_is_empty(reverse_stack))
-                    {
-                        pop_back_val(&reverse_stack);
-                    }
-                }
-                printf("FAIL\n");
-                return FAILURE;
+                flag_error = FAILURE;
             }   
         }
-        reverse_stack = temp -> next;
+        *reverse_stack = temp -> next;
         free(temp);
     }
 
-    while (!stack_is_empty(stack_operator))
+    while (!stack_is_empty(stack_operator) && flag_error == SUCCESS)
     {
         if(stack_operator -> type == PRNTS_OPEN)
         {
-            while (!stack_is_empty(stack_operator))
+            while(!stack_is_empty(stack_operator))
             {
                 pop_back_op(&stack_operator);
             }
-            while (!stack_is_empty(stack_polish_notation))
-            {
-                pop_back_op(&stack_polish_notation);
-            }
-            printf("FAIL\n");
-            return FAILURE;
+            flag_error = FAILURE;
         }
-        struct Data *temp = stack_operator;
-        push_back(&stack_polish_notation, temp -> value, temp -> type, temp -> priority);
-        stack_operator = temp -> next;
-        free(temp);
-    }
-
-    while(!stack_is_empty(stack_polish_notation))
-    {
-        struct Data *temp = stack_polish_notation;
-        push_back(&stack_reverse_polish_notation, temp -> value, temp -> type, temp -> priority);
-        stack_polish_notation = temp -> next;
-        free(temp);
-    }
-    
-    while(!stack_is_empty(stack_reverse_polish_notation))
-    {
-        struct Data *temp_n = stack_reverse_polish_notation;
-
-        if(stack_reverse_polish_notation -> type == NUMBER) push_back(&stack_calc, temp_n -> value, temp_n -> type, temp_n -> priority);
-        
-        else
-        {   
-            double a = 0;
-            if(!stack_is_empty(stack_calc)) a = pop_back_val(&stack_calc);
-            else
-            {
-                stack_clear_error(&stack_reverse_polish_notation);
-                printf("FAIL\n");
-                return FAILURE;
-            }
-
-            switch (stack_reverse_polish_notation -> type)
-            {
-            case PLUS:
-                if(stack_is_empty(stack_calc))
-                {
-                    stack_clear_error(&stack_reverse_polish_notation);
-                    printf("FAIL\n");
-                    return FAILURE;
-                }
-                push_back(&stack_calc, a + pop_back_val(&stack_calc), NUMBER, 0);
-                break;
-
-            case MINUS:
-                if(stack_is_empty(stack_calc))
-                {
-                    stack_clear_error(&stack_reverse_polish_notation);
-                    printf("FAIL\n");
-                    return FAILURE;
-                }
-                push_back(&stack_calc, pop_back_val(&stack_calc) - a, NUMBER, 0);
-                break;
-            
-            case MULTI:
-                if(stack_is_empty(stack_calc))
-                {
-                    stack_clear_error(&stack_reverse_polish_notation);
-                    printf("FAIL\n");
-                    return FAILURE;
-                }
-                push_back(&stack_calc, a * pop_back_val(&stack_calc), NUMBER, 0);
-                break;
-            
-            case DIV:
-                if(stack_is_empty(stack_calc))
-                {
-                    stack_clear_error(&stack_reverse_polish_notation);
-                    printf("FAIL\n");
-                    return FAILURE;
-                }
-                push_back(&stack_calc, pop_back_val(&stack_calc) / a, NUMBER, 0);
-                break;
-
-            case POW:
-                if(stack_is_empty(stack_calc))
-                {
-                    stack_clear_error(&stack_reverse_polish_notation);
-                    printf("FAIL\n");
-                    return FAILURE;
-                }
-                push_back(&stack_calc, powl(pop_back_val(&stack_calc), a), NUMBER, 0);
-                break;
-            
-            case MOD:
-                if(stack_is_empty(stack_calc))
-                {
-                    stack_clear_error(&stack_reverse_polish_notation);
-                    printf("FAIL\n");
-                    return FAILURE;
-                }
-                push_back(&stack_calc, fmod(pop_back_val(&stack_calc), a), NUMBER, 0);
-                break;
-            
-            case SIN:
-                push_back(&stack_calc, sin(a), NUMBER, 0);
-                break;
-            
-            case COS:
-                push_back(&stack_calc, cos(a), NUMBER, 0);
-                break;
-            
-            case SQRT:
-                push_back(&stack_calc, sqrt(a), NUMBER, 0);
-                break;
-
-            case TAN:
-                push_back(&stack_calc, tan(a), NUMBER, 0);
-                break;
-            
-            case LN:
-                push_back(&stack_calc, log(a), NUMBER, 0);
-                break;
-            
-            case LOG:
-                push_back(&stack_calc, log10(a), NUMBER, 0);
-                break;
-            
-            case ASIN:
-                push_back(&stack_calc, asin(a), NUMBER, 0);
-                break;
-
-            case ACOS:
-                push_back(&stack_calc, acos(a), NUMBER, 0);
-                break;
-            
-            case ATAN:
-                push_back(&stack_calc, atan(a), NUMBER, 0);
-                break;
-
-            default:
-                break;
-            }
+        if(flag_error == SUCCESS)
+        {
+            struct Data *temp = stack_operator;
+            push_back(stack_polish_notation, temp -> value, temp -> type, temp -> priority);
+            stack_operator = temp -> next;
+            free(temp);
         }
-
-        stack_reverse_polish_notation = temp_n -> next;
-        free(temp_n);
     }
-
-    printf("%lf\n", pop_back_val(&stack_calc));
-    //return 0;
-
-    // while (stack_reverse_polish_notation != NULL)
-    // {
-    //     if(stack_reverse_polish_notation -> type == NUMBER) printf("%lf", pop_back_val(&stack_reverse_polish_notation));
-    //     else if(stack_reverse_polish_notation -> type == PRNTS_OPEN) printf("( - %d", pop_back_op(&stack_reverse_polish_notation));
-    //     else if(stack_reverse_polish_notation -> type == PRNTS_CLOSE) printf(") - %d", pop_back_op(&stack_reverse_polish_notation));
-    //     else if(stack_reverse_polish_notation -> type == PLUS) printf("+ - %d", pop_back_op(&stack_reverse_polish_notation));
-    //     else if(stack_reverse_polish_notation -> type == MINUS) printf("- - %d", pop_back_op(&stack_reverse_polish_notation));
-    //     else if(stack_reverse_polish_notation -> type == MULTI) printf("* - %d", pop_back_op(&stack_reverse_polish_notation));
-    //     else if(stack_reverse_polish_notation -> type == DIV) printf("/ - %d", pop_back_op(&stack_reverse_polish_notation));
-    //     else if(stack_reverse_polish_notation -> type == MOD) printf("mod - %d", pop_back_op(&stack_reverse_polish_notation));
-    //     else if(stack_reverse_polish_notation -> type == POW) printf("^ - %d", pop_back_op(&stack_reverse_polish_notation));
-    //     else if(stack_reverse_polish_notation -> type == SIN) printf("sin - %d", pop_back_op(&stack_reverse_polish_notation));
-    //     else if(stack_reverse_polish_notation -> type == COS) printf("cos - %d", pop_back_op(&stack_reverse_polish_notation));
-    //     else if(stack_reverse_polish_notation -> type == SQRT) printf("sqrt - %d", pop_back_op(&stack_reverse_polish_notation));
-    //     else if(stack_reverse_polish_notation -> type == TAN) printf("tan - %d", pop_back_op(&stack_reverse_polish_notation));
-    //     else if(stack_reverse_polish_notation -> type == LN) printf("ln - %d", pop_back_op(&stack_reverse_polish_notation));
-    //     else if(stack_reverse_polish_notation -> type == LOG) printf("log - %d", pop_back_op(&stack_reverse_polish_notation));
-    //     else if(stack_reverse_polish_notation -> type == ASIN) printf("asin - %d", pop_back_op(&stack_reverse_polish_notation));
-    //     else if(stack_reverse_polish_notation -> type == ACOS) printf("acos - %d", pop_back_op(&stack_reverse_polish_notation));
-    //     else if(stack_reverse_polish_notation -> type == ATAN) printf("atan - %d", pop_back_op(&stack_reverse_polish_notation));
-    //     printf("\n");
-    //     //stack = stack -> next;
-    // }
+    return flag_error;
 }
 
-
-void stack_clear_error(struct Data **ptr)
+void flag_error_clear(struct Data **ptr1, struct Data **ptr2, struct Data **ptr3, struct Data **ptr4, struct Data **ptr5)
 {
-    while(!stack_is_empty(*ptr))
+    while(!stack_is_empty(*ptr1))
     {
-        pop_back_op(ptr);
+        pop_back_op(ptr1);
+    }
+    while(!stack_is_empty(*ptr2))
+    {
+        pop_back_op(ptr2);
+    }
+    while(!stack_is_empty(*ptr3))
+    {
+        pop_back_op(ptr3);
+    }
+    while(!stack_is_empty(*ptr4))
+    {
+        pop_back_op(ptr4);
+    }
+    while(!stack_is_empty(*ptr5))
+    {
+        pop_back_op(ptr5);
     }
 }
 
@@ -343,6 +316,8 @@ int lixem_parsing(struct Data **stack, char *str)
     int i = 0;
     int flag_error = SUCCESS;
     char *number_str = NULL;
+    
+    if(str[0] == '\0') flag_error = FAILURE;
 
     while (str[i] != '\0' && flag_error == SUCCESS) 
     {
@@ -433,6 +408,7 @@ int lixem_parsing(struct Data **stack, char *str)
             break;
 
         default:
+            flag_error = FAILURE;
             break;
         }
         i++;
@@ -449,6 +425,11 @@ int stack_is_empty(struct Data *ptr)
 int peek_stack_priority(struct Data *ptr)
 {
     return ptr -> priority;
+}
+
+int peek_stack_op(struct Data *ptr)
+{
+    return ptr -> type;
 }
 
 int pop_back_op(struct Data **ptr)

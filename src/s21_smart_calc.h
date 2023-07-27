@@ -57,7 +57,11 @@ int check_log_functions(char *str, int *i);
 int check_a_functions(char *str, int *i);
 void print_stack(struct Data *ptr);
 int peek_stack_priority(struct Data *ptr);
+int peek_stack_op(struct Data *ptr);
 int stack_is_empty(struct Data *ptr);
-void stack_clear_error(struct Data **ptr);
+void flag_error_clear(struct Data **ptr1, struct Data **ptr2, struct Data **ptr3, struct Data **ptr4, struct Data **ptr5);
+int reverse_polish_notation(struct Data **reverse_stack, struct Data **stack_polish_notation);
+void reverse_stack_elements(struct Data **stack, struct Data **reverse_stack);
+int calculate(struct Data **stack_reverse_polish_notation, struct Data **stack_calc);
 
 #endif
