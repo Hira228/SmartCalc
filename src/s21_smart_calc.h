@@ -1,3 +1,6 @@
+#ifndef S21_SMARTCALC
+#define S21_SMARTCALC
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -55,3 +58,6 @@ int check_a_functions(char *str, int *i);
 void print_stack(struct Data *ptr);
 int peek_stack_priority(struct Data *ptr);
 int stack_is_empty(struct Data *ptr);
+void stack_clear_error(struct Data **ptr);
+
+#endif
