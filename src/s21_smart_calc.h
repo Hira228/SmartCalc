@@ -32,6 +32,8 @@ enum type
     ASIN           = 17,
     ACOS           = 18,
     ATAN           = 19,
+    UNARY_MINUS    = 20,
+    UNARY_PRNTS   = 21,
 };
 
 struct Data
@@ -63,5 +65,6 @@ void flag_error_clear(struct Data **ptr1, struct Data **ptr2, struct Data **ptr3
 int reverse_polish_notation(struct Data **reverse_stack, struct Data **stack_polish_notation);
 void reverse_stack_elements(struct Data **stack, struct Data **reverse_stack);
 int calculate(struct Data **stack_reverse_polish_notation, struct Data **stack_calc);
+int check_unary_minus(struct Data *ptr);
 
 #endif

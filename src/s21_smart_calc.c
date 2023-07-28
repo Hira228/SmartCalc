@@ -38,7 +38,7 @@ int main()
 
     reverse_stack_elements(&stack_polish_notation, &stack_reverse_polish_notation);          // REVERSE STACK
     
-    flag_error = calculate(&stack_reverse_polish_notation, &stack_calc);                     // CALCILATE
+    flag_error = calculate(&stack_reverse_polish_notation, &stack_calc);                     // CALCULATE
     
     if(flag_error == FAILURE)                                                                // CHECK ERRORS
     {
@@ -160,16 +160,40 @@ void reverse_stack_elements(struct Data **stack, struct Data **reverse_stack)
     }
 }
 
+int check_unary_minus(struct Data *ptr)
+{
+    struct Data *temp = ptr -> next;
+    if(temp -> type == MINUS && temp != NULL)
+    {
+        struct Data *next_elem = temp -> next;
+        if(next_elem -> type == NUMBER && next_elem != NULL) return UNARY_MINUS;
+        else if(next_elem -> type == PRNTS_OPEN && next_elem != NULL) return UNARY_PRNTS;
+    }
+    return SUCCESS;
+}
+
 int reverse_polish_notation(struct Data **reverse_stack, struct Data **stack_polish_notation)
 {
     int flag_error = SUCCESS;
+    int flag_unary = SUCCESS;
     struct Data *stack_operator = NULL;
 
     while(!stack_is_empty(*reverse_stack) && flag_error == SUCCESS)
     {
+        if (flag_unary == UNARY_MINUS)
+        {
+            pop_back_op(reverse_stack);
+        }
+
         struct Data *temp = *reverse_stack;
-        if(temp -> type == NUMBER) push_back(stack_polish_notation, temp -> value, temp -> type, temp -> priority);
         
+        if(temp -> type == NUMBER)
+        {
+            push_back(stack_polish_notation, (flag_unary == UNARY_MINUS ? (temp -> value) * (-1) : (temp -> value)), temp -> type, temp -> priority);
+            
+            if(flag_unary == UNARY_MINUS) flag_unary = SUCCESS;
+        }
+
         else if(temp -> type != NUMBER && temp -> type != PRNTS_OPEN && temp -> type != PRNTS_CLOSE)
         {
             while(!stack_is_empty(stack_operator) && peek_stack_priority(stack_operator) >= temp -> priority && stack_operator -> type != PRNTS_OPEN)
@@ -179,7 +203,18 @@ int reverse_polish_notation(struct Data **reverse_stack, struct Data **stack_pol
                 stack_operator = temp_op -> next;
                 free(temp_op);
             }
+
             push_back(&stack_operator, temp -> value, temp -> type, temp -> priority);
+
+            if(temp -> type == DIV || temp -> type == MULTI || temp -> type == POW || temp -> type == PLUS)
+            {
+                flag_unary = check_unary_minus(temp);
+                if (flag_unary == UNARY_PRNTS)
+                {
+                    pop_back_op(&stack_operator);
+                    flag_unary = SUCCESS;
+                }
+            }
         }
 
         else if(temp -> type == PRNTS_OPEN)
