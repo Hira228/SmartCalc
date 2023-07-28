@@ -12,8 +12,8 @@ int main()
     struct Data *stack_calc = NULL;
     char str[1000] = {0};
     char new_str[1000] = {0};
-    fgets(str, sizeof(str), stdin);
-    new_parsing_str(str, new_str);
+    fgets(str, sizeof(str), stdin);                                                         // GET STRING WITH MATH EXPRESSION
+    new_parsing_str(str, new_str);                                                          // PARSING STRING WITH MATH EXPRESSION
     printf("%s\n", new_str);
     
     int flag_error = lixem_parsing(&stack, new_str);                                        // PARSING LIXEMS
@@ -117,12 +117,12 @@ int calculate(struct Data **stack_reverse_polish_notation, struct Data **stack_c
                 break;
             
             case LN:
-                if (flag_error != FAILURE && a != 0.0f) push_back(stack_calc, log(a), NUMBER, 0);
+                if (flag_error != FAILURE && a > 0.0f) push_back(stack_calc, log(a), NUMBER, 0);
                 else flag_error = FAILURE;
                 break;
             
             case LOG:
-                if (flag_error != FAILURE && a != 0.0f) push_back(stack_calc, log10(a), NUMBER, 0);
+                if (flag_error != FAILURE && a > 0.0f) push_back(stack_calc, log10(a), NUMBER, 0);
                 else flag_error = FAILURE;
                 break;
             
@@ -162,16 +162,20 @@ void reverse_stack_elements(struct Data **stack, struct Data **reverse_stack)
 
 int check_unary_minus(struct Data *ptr)
 {
-    struct Data *temp = ptr -> next;
-    if(temp -> type == MINUS && temp != NULL)
+    struct Data *temp = NULL;
+    if (!stack_is_empty(ptr)) 
+        temp = ptr->next;
+    
+    if (temp != NULL && temp->type == MINUS && !stack_is_empty(temp))
     {
-        struct Data *next_elem = temp -> next;
-        if(next_elem -> type == NUMBER && next_elem != NULL) return UNARY_MINUS;
-        else if(next_elem -> type == PRNTS_OPEN && next_elem != NULL) return UNARY_PRNTS;
+        struct Data *next_elem = temp->next;
+        if (next_elem->type == NUMBER && !stack_is_empty(next_elem))
+            return UNARY_MINUS;
+        else if (next_elem->type == PRNTS_OPEN && !stack_is_empty(next_elem))
+            return UNARY_PRNTS;
     }
     return SUCCESS;
 }
-
 int reverse_polish_notation(struct Data **reverse_stack, struct Data **stack_polish_notation)
 {
     int flag_error = SUCCESS;
@@ -206,14 +210,11 @@ int reverse_polish_notation(struct Data **reverse_stack, struct Data **stack_pol
 
             push_back(&stack_operator, temp -> value, temp -> type, temp -> priority);
 
-            if(temp -> type == DIV || temp -> type == MULTI || temp -> type == POW || temp -> type == PLUS)
+            flag_unary = check_unary_minus(temp);
+            if (flag_unary == UNARY_PRNTS)
             {
-                flag_unary = check_unary_minus(temp);
-                if (flag_unary == UNARY_PRNTS)
-                {
-                    pop_back_op(&stack_operator);
-                    flag_unary = SUCCESS;
-                }
+                pop_back_op(&stack_operator);
+                flag_unary = SUCCESS;
             }
         }
 
@@ -331,6 +332,21 @@ void new_parsing_str(char *str, char *new_str)
             new_str[index++] = str_temp[i];
             new_str[index++] = '*';
         }
+        else if((str_temp[i] == '/' || str_temp[i] == '^' || str_temp[i] == '-' || str_temp[i] == '*') && str_temp[i + 1] == '+')
+        {
+            new_str[index++] = str_temp[i];
+            i++;
+        }
+        else if(str_temp[0] == '+')
+        {
+            i++;
+            new_str[index++] = str_temp[i];
+        }
+        else if(str_temp[i] == '(' && str_temp[i + 1] == '+')
+        {
+            new_str[index++] = str_temp[i];
+            i++;
+        }
         else if(str_temp[0] == '-' && i == 0)
         {
             new_str[index++] = '0';
@@ -343,6 +359,7 @@ void new_parsing_str(char *str, char *new_str)
         }
         else new_str[index++] = str_temp[i];
     }
+    new_str[index] = '\0';
 }
 
 int lixem_parsing(struct Data **stack, char *str)
@@ -533,6 +550,7 @@ int element_definition(int c, char *str, int *i)
     if(c == 'l')                return check_log_functions(str, i);
 
     if(c == 'a')                return check_a_functions(str, i);
+
 
     return FAILURE;
 }
