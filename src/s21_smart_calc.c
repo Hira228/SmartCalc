@@ -5,14 +5,32 @@
 
 int main()
 {
+    char str[1000] = "2x^2-2x+3";
+    double a = 2.3;
+    char *res = NULL;
+    res = str_with_graph(str, a);
+    const char *result_str = res;
+    printf("%s\n", res);
+
+    char *result = execution(result_str);
+    
+    printf("%s\n", result);
+
+    free(res);
+    free(result);
+}
+
+char *execution(const char *str)
+{
     struct Data *stack = NULL;
     struct Data *reverse_stack = NULL;
     struct Data *stack_polish_notation = NULL;
     struct Data *stack_reverse_polish_notation = NULL;
     struct Data *stack_calc = NULL;
-    char str[1000] = {0};
+    char *str_res = malloc(sizeof(char) * 50);
+    //char str[1000] = {0};
     char new_str[1000] = {0};
-    fgets(str, sizeof(str), stdin);                                                         // GET STRING WITH MATH EXPRESSION
+    //fgets(str, sizeof(str), stdin);                                                       // GET STRING WITH MATH EXPRESSION
     new_parsing_str(str, new_str);                                                          // PARSING STRING WITH MATH EXPRESSION
     printf("%s\n", new_str);
     
@@ -21,10 +39,9 @@ int main()
     if(flag_error == FAILURE)                                                               // CHECK ERRORS
     {
         flag_error_clear(&stack, &reverse_stack, &stack_polish_notation, &stack_reverse_polish_notation, &stack_calc);
-        printf("FAIL\n");
-        return FAILURE;
-    } 
-
+        sprintf(str_res, "FAIL");
+        return str_res;
+    }
     reverse_stack_elements(&stack, &reverse_stack);                                         // REVERSE STACK
 
     flag_error = reverse_polish_notation(&reverse_stack, &stack_polish_notation);           // RPN
@@ -32,8 +49,8 @@ int main()
     if(flag_error == FAILURE)                                                               // CHECK ERRORS
     {
         flag_error_clear(&stack, &reverse_stack, &stack_polish_notation, &stack_reverse_polish_notation, &stack_calc);
-        printf("FAIL\n");
-        return FAILURE;
+        sprintf(str_res, "FAIL");
+        return str_res;
     } 
 
     reverse_stack_elements(&stack_polish_notation, &stack_reverse_polish_notation);          // REVERSE STACK
@@ -43,11 +60,12 @@ int main()
     if(flag_error == FAILURE)                                                                // CHECK ERRORS
     {
         flag_error_clear(&stack, &reverse_stack, &stack_polish_notation, &stack_reverse_polish_notation, &stack_calc);
-        printf("FAIL\n");
-        return FAILURE;
-    } 
+        sprintf(str_res, "FAIL");
+        return str_res;
+    }
 
-    printf("%lf\n", pop_back_val(&stack_calc));                                              // ANSWER
+    sprintf(str_res, "%.7lf", pop_back_val(&stack_calc));                                    // ANSWER
+    return str_res;
 }
 
 int calculate(struct Data **stack_reverse_polish_notation, struct Data **stack_calc)
@@ -59,7 +77,7 @@ int calculate(struct Data **stack_reverse_polish_notation, struct Data **stack_c
         struct Data *temp_n = *stack_reverse_polish_notation;
 
         if(temp_n -> type == NUMBER) push_back(stack_calc, temp_n -> value, temp_n -> type, temp_n -> priority);
-        
+        else if(temp_n -> type == X) push_back(stack_calc, -1, NUMBER, temp_n -> priority);
         else
         {   
             double a = 0;
@@ -147,6 +165,32 @@ int calculate(struct Data **stack_reverse_polish_notation, struct Data **stack_c
         free(temp_n);
     }
     return flag_error;
+}
+
+char *str_with_graph(char *str_with_x, double x)
+{
+    char *new_str = malloc(1000 * sizeof(char));
+    char val[256] = {0};
+    int index = 0;
+    sprintf(val, "%.7lf", x);
+    for(size_t i = 0; i < strlen(str_with_x); i++)
+    {
+        if(str_with_x[i] == 'x')
+        {
+            new_str[index++] = '(';
+            for(int j = 0; val[j] != '\0'; j++)
+            {
+                new_str[index++] = val[j];
+            }
+            new_str[index++] = ')';
+        }
+        else
+        {
+            new_str[index++] = str_with_x[i];
+        }
+    }
+    new_str[index] = '\0';
+    return new_str;
 }
 
 void reverse_stack_elements(struct Data **stack, struct Data **reverse_stack)
@@ -296,7 +340,7 @@ void flag_error_clear(struct Data **ptr1, struct Data **ptr2, struct Data **ptr3
     }
 }
 
-void new_parsing_str(char *str, char *new_str)
+void new_parsing_str(const char *str, char *new_str)
 {
     char str_temp[1000] = {0};
     int index_temp = 0;
@@ -309,10 +353,14 @@ void new_parsing_str(char *str, char *new_str)
         }
         str_temp[index_temp++] = str[i];
     }
-    str_temp[--index_temp] = '\0';
     for(size_t i = 0; i < strlen(str_temp); i++)
     {
         if((str_temp[i] >= '0' && str_temp[i] <= '9') && str_temp[i + 1] == '(')
+        {
+            new_str[index++] = str_temp[i];
+            new_str[index++] = '*';
+        }
+        else if((str_temp[i] >= '0' && str_temp[i] <= '9') && str_temp[i + 1] == 'x')
         {
             new_str[index++] = str_temp[i];
             new_str[index++] = '*';
@@ -359,7 +407,7 @@ void new_parsing_str(char *str, char *new_str)
         }
         else new_str[index++] = str_temp[i];
     }
-    new_str[index] = '\0';
+    //new_str[index] = '\0';
 }
 
 int lixem_parsing(struct Data **stack, char *str)
@@ -385,6 +433,10 @@ int lixem_parsing(struct Data **stack, char *str)
             }
             free(number_str);
             number_str = NULL;
+            break;
+        
+        case X:
+            push_back(stack, 0, X, 4);
             break;
 
         case PRNTS_OPEN: 
@@ -539,6 +591,8 @@ int element_definition(int c, char *str, int *i)
 
     if(c == '^')                return POW;
 
+    if(c == 'x')                return X;
+
     if(c == 'm')                return check_mod_function(str, i);
 
     if(c == 's')                return check_s_functions(str, i);
@@ -569,6 +623,7 @@ int number_entry(char *str, char *number_str, int *i)
         (*i)++;
     }
     (*i)--;
+    number_str[index] = '\0';
     return SUCCESS;
 }
 

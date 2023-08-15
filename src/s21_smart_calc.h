@@ -34,6 +34,7 @@ enum type
     ATAN           = 19,
     UNARY_MINUS    = 20,
     UNARY_PRNTS    = 21,
+    X              = 22,
 };
 
 struct Data
@@ -44,7 +45,7 @@ struct Data
     struct Data *next;
 };
 
-void new_parsing_str(char *str, char *new_str);
+void new_parsing_str(const char *str, char *new_str);
 int lixem_parsing(struct Data **stack, char *str);
 void push_back(struct Data **ptr, double Data, int type_t, int priority_t);
 double pop_back_val(struct Data **ptr);
@@ -67,5 +68,7 @@ void reverse_stack_elements(struct Data **stack, struct Data **reverse_stack);
 int calculate(struct Data **stack_reverse_polish_notation, struct Data **stack_calc);
 int check_unary_minus(struct Data *ptr);
 int check_unary_plus(struct Data *ptr);
+char *execution(const char *str);
+char *str_with_graph(char *str_with_x, double x);
 
 #endif
