@@ -3,23 +3,6 @@
 // SUCCESS 0
 // FAILURE 1
 
-int main()
-{
-    char str[1000] = "2x^2-2x+3";
-    double a = 2.3;
-    char *res = NULL;
-    res = str_with_graph(str, a);
-    const char *result_str = res;
-    printf("%s\n", res);
-
-    char *result = execution(result_str);
-    
-    printf("%s\n", result);
-
-    free(res);
-    free(result);
-}
-
 char *execution(const char *str)
 {
     struct Data *stack = NULL;
@@ -33,9 +16,9 @@ char *execution(const char *str)
     //fgets(str, sizeof(str), stdin);                                                       // GET STRING WITH MATH EXPRESSION
     new_parsing_str(str, new_str);                                                          // PARSING STRING WITH MATH EXPRESSION
     printf("%s\n", new_str);
-    
+
     int flag_error = lixem_parsing(&stack, new_str);                                        // PARSING LIXEMS
-    
+
     if(flag_error == FAILURE)                                                               // CHECK ERRORS
     {
         flag_error_clear(&stack, &reverse_stack, &stack_polish_notation, &stack_reverse_polish_notation, &stack_calc);
@@ -51,12 +34,12 @@ char *execution(const char *str)
         flag_error_clear(&stack, &reverse_stack, &stack_polish_notation, &stack_reverse_polish_notation, &stack_calc);
         sprintf(str_res, "FAIL");
         return str_res;
-    } 
+    }
 
     reverse_stack_elements(&stack_polish_notation, &stack_reverse_polish_notation);          // REVERSE STACK
-    
+
     flag_error = calculate(&stack_reverse_polish_notation, &stack_calc);                     // CALCULATE
-    
+
     if(flag_error == FAILURE)                                                                // CHECK ERRORS
     {
         flag_error_clear(&stack, &reverse_stack, &stack_polish_notation, &stack_reverse_polish_notation, &stack_calc);
@@ -68,6 +51,18 @@ char *execution(const char *str)
     return str_res;
 }
 
+int check_x_str(const char *str)
+{
+    for (int i = 0; str[i] != '\0'; i++)
+    {
+        if(str[i] == 'x')
+        {
+            return 1;
+        }
+    }
+    return 0;
+}
+
 int calculate(struct Data **stack_reverse_polish_notation, struct Data **stack_calc)
 {
     int flag_error = SUCCESS;
@@ -77,12 +72,11 @@ int calculate(struct Data **stack_reverse_polish_notation, struct Data **stack_c
         struct Data *temp_n = *stack_reverse_polish_notation;
 
         if(temp_n -> type == NUMBER) push_back(stack_calc, temp_n -> value, temp_n -> type, temp_n -> priority);
-        else if(temp_n -> type == X) push_back(stack_calc, -1, NUMBER, temp_n -> priority);
         else
-        {   
+        {
             double a = 0;
             if(!stack_is_empty(*stack_calc)) a = pop_back_val(stack_calc);
-            
+
             else flag_error = FAILURE;
 
             switch (temp_n -> type)
@@ -96,12 +90,12 @@ int calculate(struct Data **stack_reverse_polish_notation, struct Data **stack_c
                 if(stack_is_empty(*stack_calc)) flag_error = FAILURE;
                 else push_back(stack_calc, pop_back_val(stack_calc) - a, NUMBER, 0);
                 break;
-            
+
             case MULTI:
                 if(stack_is_empty(*stack_calc)) flag_error = FAILURE;
                 else push_back(stack_calc, a * pop_back_val(stack_calc), NUMBER, 0);
                 break;
-            
+
             case DIV:
                 if(stack_is_empty(*stack_calc) || a == 0.0f) flag_error = FAILURE;
                 else push_back(stack_calc, pop_back_val(stack_calc) / a, NUMBER, 0);
@@ -111,20 +105,20 @@ int calculate(struct Data **stack_reverse_polish_notation, struct Data **stack_c
                 if(stack_is_empty(*stack_calc)) flag_error = FAILURE;
                 else push_back(stack_calc, powl(pop_back_val(stack_calc), a), NUMBER, 0);
                 break;
-            
+
             case MOD:
                 if(stack_is_empty(*stack_calc)) flag_error = FAILURE;
                 else push_back(stack_calc, fmod(pop_back_val(stack_calc), a), NUMBER, 0);
                 break;
-            
+
             case SIN:
                 if (flag_error == SUCCESS) push_back(stack_calc, sin(a), NUMBER, 0);
                 break;
-            
+
             case COS:
                 if (flag_error == SUCCESS) push_back(stack_calc, cos(a), NUMBER, 0);
                 break;
-            
+
             case SQRT:
                 if (flag_error != FAILURE && a >= 0.0f) push_back(stack_calc, sqrt(a), NUMBER, 0);
                 else flag_error = FAILURE;
@@ -133,17 +127,17 @@ int calculate(struct Data **stack_reverse_polish_notation, struct Data **stack_c
             case TAN:
                 if (flag_error == SUCCESS) push_back(stack_calc, tan(a), NUMBER, 0);
                 break;
-            
+
             case LN:
                 if (flag_error != FAILURE && a > 0.0f) push_back(stack_calc, log(a), NUMBER, 0);
                 else flag_error = FAILURE;
                 break;
-            
+
             case LOG:
                 if (flag_error != FAILURE && a > 0.0f) push_back(stack_calc, log10(a), NUMBER, 0);
                 else flag_error = FAILURE;
                 break;
-            
+
             case ASIN:
                 if (flag_error == SUCCESS) push_back(stack_calc, asin(a), NUMBER, 0);
                 break;
@@ -151,7 +145,7 @@ int calculate(struct Data **stack_reverse_polish_notation, struct Data **stack_c
             case ACOS:
                 if (flag_error == SUCCESS) push_back(stack_calc, acos(a), NUMBER, 0);
                 break;
-            
+
             case ATAN:
                 if (flag_error == SUCCESS) push_back(stack_calc, atan(a), NUMBER, 0);
                 break;
@@ -167,7 +161,7 @@ int calculate(struct Data **stack_reverse_polish_notation, struct Data **stack_c
     return flag_error;
 }
 
-char *str_with_graph(char *str_with_x, double x)
+char *str_with_graph(const char *str_with_x, double x)
 {
     char *new_str = malloc(1000 * sizeof(char));
     char val[256] = {0};
@@ -207,9 +201,9 @@ void reverse_stack_elements(struct Data **stack, struct Data **reverse_stack)
 int check_unary_minus(struct Data *ptr)
 {
     struct Data *temp = NULL;
-    if (!stack_is_empty(ptr)) 
+    if (!stack_is_empty(ptr))
         temp = ptr->next;
-    
+
     if (temp != NULL && temp->type == MINUS && !stack_is_empty(temp))
     {
         struct Data *next_elem = temp->next;
@@ -234,11 +228,11 @@ int reverse_polish_notation(struct Data **reverse_stack, struct Data **stack_pol
         }
 
         struct Data *temp = *reverse_stack;
-        
+
         if(temp -> type == NUMBER)
         {
             push_back(stack_polish_notation, (flag_unary == UNARY_MINUS ? (temp -> value) * (-1) : (temp -> value)), temp -> type, temp -> priority);
-            
+
             if(flag_unary == UNARY_MINUS) flag_unary = SUCCESS;
         }
 
@@ -289,7 +283,7 @@ int reverse_polish_notation(struct Data **reverse_stack, struct Data **stack_pol
                     pop_back_op(&stack_operator);
                 }
                 flag_error = FAILURE;
-            }   
+            }
         }
         *reverse_stack = temp -> next;
         free(temp);
@@ -416,10 +410,10 @@ int lixem_parsing(struct Data **stack, char *str)
     int i = 0;
     int flag_error = SUCCESS;
     char *number_str = NULL;
-    
+
     if(str[0] == '\0') flag_error = FAILURE;
 
-    while (str[i] != '\0' && flag_error == SUCCESS) 
+    while (str[i] != '\0' && flag_error == SUCCESS)
     {
         switch (element_definition(str[i], str, &i))
         {
@@ -434,12 +428,8 @@ int lixem_parsing(struct Data **stack, char *str)
             free(number_str);
             number_str = NULL;
             break;
-        
-        case X:
-            push_back(stack, 0, X, 4);
-            break;
 
-        case PRNTS_OPEN: 
+        case PRNTS_OPEN:
             push_back(stack, 0, PRNTS_OPEN, 4);
             break;
 
@@ -454,7 +444,7 @@ int lixem_parsing(struct Data **stack, char *str)
         case MINUS:
             push_back(stack, 0, MINUS, 1);
             break;
-        
+
         case MULTI:
             push_back(stack, 0, MULTI, 2);
             break;
@@ -462,7 +452,7 @@ int lixem_parsing(struct Data **stack, char *str)
         case DIV:
             push_back(stack, 0, DIV, 2);
             break;
-        
+
         case MOD:
             push_back(stack, 0, MOD, 2);
             break;
@@ -470,11 +460,11 @@ int lixem_parsing(struct Data **stack, char *str)
         case POW:
             push_back(stack, 0, POW, 3);
             break;
-        
+
         case SIN:
             push_back(stack, 0, SIN, 4);
             break;
-        
+
         case SQRT:
             push_back(stack, 0, SQRT, 4);
             break;
@@ -501,13 +491,13 @@ int lixem_parsing(struct Data **stack, char *str)
 
         case ACOS:
             push_back(stack, 0, ACOS, 4);
-            break;    
+            break;
 
         case ATAN:
             push_back(stack, 0, ATAN, 4);
             break;
 
-        case FAILURE: 
+        case FAILURE:
             flag_error = FAILURE;
             break;
 
@@ -573,7 +563,7 @@ void push_back(struct Data **ptr, double Data, int type_t, int priority_t)
     *ptr = elem;
 }
 
-int element_definition(int c, char *str, int *i) 
+int element_definition(int c, char *str, int *i)
 {
     if(c >= '0' && c <= '9')    return NUMBER;
 
@@ -590,8 +580,6 @@ int element_definition(int c, char *str, int *i)
     if(c == '/')                return DIV;
 
     if(c == '^')                return POW;
-
-    if(c == 'x')                return X;
 
     if(c == 'm')                return check_mod_function(str, i);
 
@@ -634,7 +622,7 @@ int check_cos_function(char *str, int *i)
         *i += 2;
         return COS;
     }
-    
+
     return FAILURE;
 }
 

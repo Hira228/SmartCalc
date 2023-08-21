@@ -34,7 +34,6 @@ enum type
     ATAN           = 19,
     UNARY_MINUS    = 20,
     UNARY_PRNTS    = 21,
-    X              = 22,
 };
 
 struct Data
@@ -69,6 +68,7 @@ int calculate(struct Data **stack_reverse_polish_notation, struct Data **stack_c
 int check_unary_minus(struct Data *ptr);
 int check_unary_plus(struct Data *ptr);
 char *execution(const char *str);
-char *str_with_graph(char *str_with_x, double x);
+char *str_with_graph(const char *str_with_x, double x);
+int check_x_str(const char *str);
 
 #endif
