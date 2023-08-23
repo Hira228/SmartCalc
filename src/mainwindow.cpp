@@ -56,11 +56,11 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->pushButton_close_prnt, SIGNAL(clicked()),this, SLOT(add_lexems()));
     connect(ui->pushButton_point, SIGNAL(clicked()),this, SLOT(add_lexems()));
     connect(ui->pushButton_mod, SIGNAL(clicked()),this, SLOT(add_lexems()));
-    connect(ui->pushButton_exp, SIGNAL(clicked()),this, SLOT(add_lexems()));
     connect(ui->pushButton_pow, SIGNAL(clicked()),this, SLOT(add_lexems()));
     connect(ui->pushButton_ac, SIGNAL(clicked()),this, SLOT(clearText()));
     connect(ui->pushButton_sqrt, SIGNAL(clicked()),this, SLOT(add_lexems()));
     connect(ui->pushButton_res, SIGNAL(clicked()),this, SLOT(calc_result()));
+    //connect(ui->pushButton_graph, SIGNAL(clicked()),this, SLOT(on_pushButton_graph_clicked()));
 }
 
 MainWindow::~MainWindow()
@@ -135,8 +135,10 @@ void MainWindow::calc_result()
 
 
 
+
 void MainWindow::on_pushButton_graph_clicked()
 {
-
+    graph_ui = new Graph(this);
+    graph_ui->show();
 }
 

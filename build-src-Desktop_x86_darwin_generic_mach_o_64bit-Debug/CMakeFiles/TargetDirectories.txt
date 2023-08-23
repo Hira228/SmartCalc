@@ -1,0 +1,8 @@
+/Users/gradyzan/C7_SmartCalc_v1.0-1/build-src-Desktop_x86_darwin_generic_mach_o_64bit-Debug/CMakeFiles/calculator.dir
+/Users/gradyzan/C7_SmartCalc_v1.0-1/build-src-Desktop_x86_darwin_generic_mach_o_64bit-Debug/CMakeFiles/edit_cache.dir
+/Users/gradyzan/C7_SmartCalc_v1.0-1/build-src-Desktop_x86_darwin_generic_mach_o_64bit-Debug/CMakeFiles/rebuild_cache.dir
+/Users/gradyzan/C7_SmartCalc_v1.0-1/build-src-Desktop_x86_darwin_generic_mach_o_64bit-Debug/CMakeFiles/list_install_components.dir
+/Users/gradyzan/C7_SmartCalc_v1.0-1/build-src-Desktop_x86_darwin_generic_mach_o_64bit-Debug/CMakeFiles/install.dir
+/Users/gradyzan/C7_SmartCalc_v1.0-1/build-src-Desktop_x86_darwin_generic_mach_o_64bit-Debug/CMakeFiles/install/local.dir
+/Users/gradyzan/C7_SmartCalc_v1.0-1/build-src-Desktop_x86_darwin_generic_mach_o_64bit-Debug/CMakeFiles/install/strip.dir
+/Users/gradyzan/C7_SmartCalc_v1.0-1/build-src-Desktop_x86_darwin_generic_mach_o_64bit-Debug/CMakeFiles/calculator_autogen.dir

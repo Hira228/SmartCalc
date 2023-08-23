@@ -379,9 +379,9 @@ void new_parsing_str(const char *str, char *new_str)
             new_str[index++] = str_temp[i];
             i++;
         }
-        else if(str_temp[0] == '+')
+        else if(str_temp[0] == '+' && i == 0)
         {
-            i++;
+            new_str[index++] = '0';
             new_str[index++] = str_temp[i];
         }
         else if(str_temp[i] == '(' && str_temp[i + 1] == '+')

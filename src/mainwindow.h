@@ -4,6 +4,8 @@
 #include <QMainWindow>
 #include <QLineEdit>
 
+#include "graph.h"
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -17,19 +19,22 @@ public:
     ~MainWindow();
 
 private slots:
+    void on_pushButton_graph_clicked();
+
+private slots:
     void expandWindow();
 
 private slots:
     void add_lexems();
     void clearText();
     void calc_result();
-    void on_pushButton_graph_clicked();
 
 private:
     Ui::MainWindow *ui;
     QAction *expandCalculatorAction;
     QMenu *fileMenu;
     QLineEdit *inputXLineEdit;
+    Graph *graph_ui;
 };
 
 #endif // MAINWINDOW_H
