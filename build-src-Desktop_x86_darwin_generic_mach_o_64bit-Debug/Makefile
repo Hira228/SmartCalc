@@ -187,6 +187,32 @@ calculator_autogen/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/calculator_autogen.dir/build.make CMakeFiles/calculator_autogen.dir/build
 .PHONY : calculator_autogen/fast
 
+#=============================================================================
+# Target rules for targets named qcustomplot
+
+# Build rule for target.
+qcustomplot: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 qcustomplot
+.PHONY : qcustomplot
+
+# fast build rule for target.
+qcustomplot/fast:
+	$(MAKE) $(MAKESILENT) -f QCustomPlot-library/lib/CMakeFiles/qcustomplot.dir/build.make QCustomPlot-library/lib/CMakeFiles/qcustomplot.dir/build
+.PHONY : qcustomplot/fast
+
+#=============================================================================
+# Target rules for targets named qcustomplot_autogen
+
+# Build rule for target.
+qcustomplot_autogen: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 qcustomplot_autogen
+.PHONY : qcustomplot_autogen
+
+# fast build rule for target.
+qcustomplot_autogen/fast:
+	$(MAKE) $(MAKESILENT) -f QCustomPlot-library/lib/CMakeFiles/qcustomplot_autogen.dir/build.make QCustomPlot-library/lib/CMakeFiles/qcustomplot_autogen.dir/build
+.PHONY : qcustomplot_autogen/fast
+
 calculator_autogen/mocs_compilation.o: calculator_autogen/mocs_compilation.cpp.o
 .PHONY : calculator_autogen/mocs_compilation.o
 
@@ -210,6 +236,30 @@ calculator_autogen/mocs_compilation.s: calculator_autogen/mocs_compilation.cpp.s
 calculator_autogen/mocs_compilation.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/calculator.dir/build.make CMakeFiles/calculator.dir/calculator_autogen/mocs_compilation.cpp.s
 .PHONY : calculator_autogen/mocs_compilation.cpp.s
+
+graph.o: graph.cpp.o
+.PHONY : graph.o
+
+# target to build an object file
+graph.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/calculator.dir/build.make CMakeFiles/calculator.dir/graph.cpp.o
+.PHONY : graph.cpp.o
+
+graph.i: graph.cpp.i
+.PHONY : graph.i
+
+# target to preprocess a source file
+graph.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/calculator.dir/build.make CMakeFiles/calculator.dir/graph.cpp.i
+.PHONY : graph.cpp.i
+
+graph.s: graph.cpp.s
+.PHONY : graph.s
+
+# target to generate assembly for a file
+graph.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/calculator.dir/build.make CMakeFiles/calculator.dir/graph.cpp.s
+.PHONY : graph.cpp.s
 
 main.o: main.cpp.o
 .PHONY : main.o
@@ -259,30 +309,6 @@ mainwindow.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/calculator.dir/build.make CMakeFiles/calculator.dir/mainwindow.cpp.s
 .PHONY : mainwindow.cpp.s
 
-qcustomplot.o: qcustomplot.cpp.o
-.PHONY : qcustomplot.o
-
-# target to build an object file
-qcustomplot.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/calculator.dir/build.make CMakeFiles/calculator.dir/qcustomplot.cpp.o
-.PHONY : qcustomplot.cpp.o
-
-qcustomplot.i: qcustomplot.cpp.i
-.PHONY : qcustomplot.i
-
-# target to preprocess a source file
-qcustomplot.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/calculator.dir/build.make CMakeFiles/calculator.dir/qcustomplot.cpp.i
-.PHONY : qcustomplot.cpp.i
-
-qcustomplot.s: qcustomplot.cpp.s
-.PHONY : qcustomplot.s
-
-# target to generate assembly for a file
-qcustomplot.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/calculator.dir/build.make CMakeFiles/calculator.dir/qcustomplot.cpp.s
-.PHONY : qcustomplot.cpp.s
-
 s21_smart_calc.o: s21_smart_calc.c.o
 .PHONY : s21_smart_calc.o
 
@@ -320,19 +346,21 @@ help:
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... calculator_autogen"
+	@echo "... qcustomplot_autogen"
 	@echo "... calculator"
+	@echo "... qcustomplot"
 	@echo "... calculator_autogen/mocs_compilation.o"
 	@echo "... calculator_autogen/mocs_compilation.i"
 	@echo "... calculator_autogen/mocs_compilation.s"
+	@echo "... graph.o"
+	@echo "... graph.i"
+	@echo "... graph.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
 	@echo "... mainwindow.o"
 	@echo "... mainwindow.i"
 	@echo "... mainwindow.s"
-	@echo "... qcustomplot.o"
-	@echo "... qcustomplot.i"
-	@echo "... qcustomplot.s"
 	@echo "... s21_smart_calc.o"
 	@echo "... s21_smart_calc.i"
 	@echo "... s21_smart_calc.s"

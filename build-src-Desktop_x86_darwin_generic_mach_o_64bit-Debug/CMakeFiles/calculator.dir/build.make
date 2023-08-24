@@ -111,19 +111,19 @@ CMakeFiles/calculator.dir/mainwindow.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/calculator.dir/mainwindow.cpp.s"
 	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/gradyzan/C7_SmartCalc_v1.0-1/src/mainwindow.cpp -o CMakeFiles/calculator.dir/mainwindow.cpp.s
 
-CMakeFiles/calculator.dir/qcustomplot.cpp.o: CMakeFiles/calculator.dir/flags.make
-CMakeFiles/calculator.dir/qcustomplot.cpp.o: /Users/gradyzan/C7_SmartCalc_v1.0-1/src/qcustomplot.cpp
-CMakeFiles/calculator.dir/qcustomplot.cpp.o: CMakeFiles/calculator.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/gradyzan/C7_SmartCalc_v1.0-1/build-src-Desktop_x86_darwin_generic_mach_o_64bit-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/calculator.dir/qcustomplot.cpp.o"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/calculator.dir/qcustomplot.cpp.o -MF CMakeFiles/calculator.dir/qcustomplot.cpp.o.d -o CMakeFiles/calculator.dir/qcustomplot.cpp.o -c /Users/gradyzan/C7_SmartCalc_v1.0-1/src/qcustomplot.cpp
+CMakeFiles/calculator.dir/graph.cpp.o: CMakeFiles/calculator.dir/flags.make
+CMakeFiles/calculator.dir/graph.cpp.o: /Users/gradyzan/C7_SmartCalc_v1.0-1/src/graph.cpp
+CMakeFiles/calculator.dir/graph.cpp.o: CMakeFiles/calculator.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/gradyzan/C7_SmartCalc_v1.0-1/build-src-Desktop_x86_darwin_generic_mach_o_64bit-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/calculator.dir/graph.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/calculator.dir/graph.cpp.o -MF CMakeFiles/calculator.dir/graph.cpp.o.d -o CMakeFiles/calculator.dir/graph.cpp.o -c /Users/gradyzan/C7_SmartCalc_v1.0-1/src/graph.cpp
 
-CMakeFiles/calculator.dir/qcustomplot.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/calculator.dir/qcustomplot.cpp.i"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/gradyzan/C7_SmartCalc_v1.0-1/src/qcustomplot.cpp > CMakeFiles/calculator.dir/qcustomplot.cpp.i
+CMakeFiles/calculator.dir/graph.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/calculator.dir/graph.cpp.i"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/gradyzan/C7_SmartCalc_v1.0-1/src/graph.cpp > CMakeFiles/calculator.dir/graph.cpp.i
 
-CMakeFiles/calculator.dir/qcustomplot.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/calculator.dir/qcustomplot.cpp.s"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/gradyzan/C7_SmartCalc_v1.0-1/src/qcustomplot.cpp -o CMakeFiles/calculator.dir/qcustomplot.cpp.s
+CMakeFiles/calculator.dir/graph.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/calculator.dir/graph.cpp.s"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/gradyzan/C7_SmartCalc_v1.0-1/src/graph.cpp -o CMakeFiles/calculator.dir/graph.cpp.s
 
 CMakeFiles/calculator.dir/s21_smart_calc.c.o: CMakeFiles/calculator.dir/flags.make
 CMakeFiles/calculator.dir/s21_smart_calc.c.o: /Users/gradyzan/C7_SmartCalc_v1.0-1/src/s21_smart_calc.c
@@ -144,7 +144,7 @@ calculator_OBJECTS = \
 "CMakeFiles/calculator.dir/calculator_autogen/mocs_compilation.cpp.o" \
 "CMakeFiles/calculator.dir/main.cpp.o" \
 "CMakeFiles/calculator.dir/mainwindow.cpp.o" \
-"CMakeFiles/calculator.dir/qcustomplot.cpp.o" \
+"CMakeFiles/calculator.dir/graph.cpp.o" \
 "CMakeFiles/calculator.dir/s21_smart_calc.c.o"
 
 # External object files for target calculator
@@ -153,9 +153,10 @@ calculator_EXTERNAL_OBJECTS =
 calculator.app/Contents/MacOS/calculator: CMakeFiles/calculator.dir/calculator_autogen/mocs_compilation.cpp.o
 calculator.app/Contents/MacOS/calculator: CMakeFiles/calculator.dir/main.cpp.o
 calculator.app/Contents/MacOS/calculator: CMakeFiles/calculator.dir/mainwindow.cpp.o
-calculator.app/Contents/MacOS/calculator: CMakeFiles/calculator.dir/qcustomplot.cpp.o
+calculator.app/Contents/MacOS/calculator: CMakeFiles/calculator.dir/graph.cpp.o
 calculator.app/Contents/MacOS/calculator: CMakeFiles/calculator.dir/s21_smart_calc.c.o
 calculator.app/Contents/MacOS/calculator: CMakeFiles/calculator.dir/build.make
+calculator.app/Contents/MacOS/calculator: /Users/gradyzan/C7_SmartCalc_v1.0-1/src/build/output/amd64/Debug/lib/libqcustomplot.2.1.1.1.dylib
 calculator.app/Contents/MacOS/calculator: /usr/local/lib/QtPrintSupport.framework/Versions/A/QtPrintSupport
 calculator.app/Contents/MacOS/calculator: /usr/local/lib/QtWidgets.framework/Versions/A/QtWidgets
 calculator.app/Contents/MacOS/calculator: /usr/local/lib/QtGui.framework/Versions/A/QtGui

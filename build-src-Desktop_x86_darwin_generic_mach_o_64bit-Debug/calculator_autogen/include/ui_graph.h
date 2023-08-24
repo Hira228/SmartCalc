@@ -11,34 +11,39 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
-#include <QtWidgets/QWidget>
+#include <QtWidgets/QDialog>
+#include "qcustomplot.h"
 
 QT_BEGIN_NAMESPACE
 
-class Ui_graph
+class Ui_Graph
 {
 public:
+    QCustomPlot *widget;
 
-    void setupUi(QWidget *graph)
+    void setupUi(QDialog *Graph)
     {
-        if (graph->objectName().isEmpty())
-            graph->setObjectName(QString::fromUtf8("graph"));
-        graph->resize(400, 300);
+        if (Graph->objectName().isEmpty())
+            Graph->setObjectName(QString::fromUtf8("Graph"));
+        Graph->resize(623, 429);
+        widget = new QCustomPlot(Graph);
+        widget->setObjectName(QString::fromUtf8("widget"));
+        widget->setGeometry(QRect(-1, -1, 621, 431));
 
-        retranslateUi(graph);
+        retranslateUi(Graph);
 
-        QMetaObject::connectSlotsByName(graph);
+        QMetaObject::connectSlotsByName(Graph);
     } // setupUi
 
-    void retranslateUi(QWidget *graph)
+    void retranslateUi(QDialog *Graph)
     {
-        graph->setWindowTitle(QCoreApplication::translate("graph", "Form", nullptr));
+        Graph->setWindowTitle(QCoreApplication::translate("Graph", "Dialog", nullptr));
     } // retranslateUi
 
 };
 
 namespace Ui {
-    class graph: public Ui_graph {};
+    class Graph: public Ui_Graph {};
 } // namespace Ui
 
 QT_END_NAMESPACE

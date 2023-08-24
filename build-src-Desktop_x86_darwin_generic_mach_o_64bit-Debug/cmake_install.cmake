@@ -42,9 +42,16 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
   if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/./calculator.app/Contents/MacOS/calculator" AND
      NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/./calculator.app/Contents/MacOS/calculator")
     execute_process(COMMAND /usr/bin/install_name_tool
+      -delete_rpath "/Users/gradyzan/C7_SmartCalc_v1.0-1/src/build/output/amd64/Debug/lib"
       -delete_rpath "/usr/local/lib"
       "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/./calculator.app/Contents/MacOS/calculator")
   endif()
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for each subdirectory.
+  include("/Users/gradyzan/C7_SmartCalc_v1.0-1/build-src-Desktop_x86_darwin_generic_mach_o_64bit-Debug/QCustomPlot-library/cmake_install.cmake")
+
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)

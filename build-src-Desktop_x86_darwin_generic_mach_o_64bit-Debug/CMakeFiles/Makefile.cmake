@@ -49,7 +49,10 @@ set(CMAKE_MAKEFILE_DEPENDS
   "CMakeFiles/3.23.0/CMakeCXXCompiler.cmake"
   "CMakeFiles/3.23.0/CMakeSystem.cmake"
   "/Users/gradyzan/C7_SmartCalc_v1.0-1/src/CMakeLists.txt"
-  "/private/var/folders/zz/zyxvpxvq6csfxvn_n0002qgc000nvv/T/AppTranslocation/67266943-639F-4CD8-AF4C-E9F299C8DA31/d/Qt Creator.app/Contents/Resources/package-manager/auto-setup.cmake"
+  "/Users/gradyzan/C7_SmartCalc_v1.0-1/src/QCustomPlot-library/CMakeLists.txt"
+  "/Users/gradyzan/C7_SmartCalc_v1.0-1/src/QCustomPlot-library/lib/CMakeLists.txt"
+  "/Users/gradyzan/C7_SmartCalc_v1.0-1/src/QCustomPlot-library/lib/config.h.in"
+  "/private/var/folders/zz/zyxvpxvq6csfxvn_n0002qgc000nvv/T/AppTranslocation/5A20D7AC-B692-4E6E-AB69-678D430FBF02/d/Qt Creator.app/Contents/Resources/package-manager/auto-setup.cmake"
   "/usr/local/lib/cmake/Qt6/FindCups.cmake"
   "/usr/local/lib/cmake/Qt6/FindWrapAtomic.cmake"
   "/usr/local/lib/cmake/Qt6/FindWrapOpenGL.cmake"
@@ -161,10 +164,16 @@ set(CMAKE_MAKEFILE_PRODUCTS
   "calculator.app/Contents/Info.plist"
   "calculator.app/Contents/Info.plist"
   "CMakeFiles/CMakeDirectoryInformation.cmake"
+  "QCustomPlot-library/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "/Users/gradyzan/C7_SmartCalc_v1.0-1/src/QCustomPlot-library/lib/config.h"
+  "QCustomPlot-library/lib/CMakeFiles/qcustomplot_autogen.dir/AutogenInfo.json"
+  "QCustomPlot-library/lib/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/calculator.dir/DependInfo.cmake"
   "CMakeFiles/calculator_autogen.dir/DependInfo.cmake"
+  "QCustomPlot-library/lib/CMakeFiles/qcustomplot.dir/DependInfo.cmake"
+  "QCustomPlot-library/lib/CMakeFiles/qcustomplot_autogen.dir/DependInfo.cmake"
   )

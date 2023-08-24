@@ -69,7 +69,7 @@ public:
     QLabel *show_res_7;
     QLabel *show_res_8;
     QLineEdit *lineEdit_x;
-    QLineEdit *lineEdit_x__min_graph;
+    QLineEdit *lineEdit_x_min_graph;
     QLineEdit *lineEdit_y_min_graph;
     QLineEdit *lineEdit_y_max_graph;
     QLineEdit *lineEdit_x_max_graph;
@@ -769,11 +769,11 @@ public:
         lineEdit_x->setFont(font2);
         lineEdit_x->setStyleSheet(QString::fromUtf8("  background-color : white;\n"
 ""));
-        lineEdit_x__min_graph = new QLineEdit(centralwidget);
-        lineEdit_x__min_graph->setObjectName(QString::fromUtf8("lineEdit_x__min_graph"));
-        lineEdit_x__min_graph->setGeometry(QRect(670, 150, 111, 41));
-        lineEdit_x__min_graph->setFont(font2);
-        lineEdit_x__min_graph->setStyleSheet(QString::fromUtf8("  background-color : white;\n"
+        lineEdit_x_min_graph = new QLineEdit(centralwidget);
+        lineEdit_x_min_graph->setObjectName(QString::fromUtf8("lineEdit_x_min_graph"));
+        lineEdit_x_min_graph->setGeometry(QRect(670, 150, 111, 41));
+        lineEdit_x_min_graph->setFont(font2);
+        lineEdit_x_min_graph->setStyleSheet(QString::fromUtf8("  background-color : white;\n"
 ""));
         lineEdit_y_min_graph = new QLineEdit(centralwidget);
         lineEdit_y_min_graph->setObjectName(QString::fromUtf8("lineEdit_y_min_graph"));
@@ -854,7 +854,7 @@ public:
         show_res_7->setText(QCoreApplication::translate("MainWindow", "  Plotting Window", nullptr));
         show_res_8->setText(QCoreApplication::translate("MainWindow", "  x =", nullptr));
         lineEdit_x->setPlaceholderText(QCoreApplication::translate("MainWindow", "0", nullptr));
-        lineEdit_x__min_graph->setPlaceholderText(QCoreApplication::translate("MainWindow", "0", nullptr));
+        lineEdit_x_min_graph->setPlaceholderText(QCoreApplication::translate("MainWindow", "0", nullptr));
         lineEdit_y_min_graph->setPlaceholderText(QCoreApplication::translate("MainWindow", "0", nullptr));
         lineEdit_y_max_graph->setPlaceholderText(QCoreApplication::translate("MainWindow", "0", nullptr));
         lineEdit_x_max_graph->setPlaceholderText(QCoreApplication::translate("MainWindow", "0", nullptr));
