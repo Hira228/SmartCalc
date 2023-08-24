@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QLineEdit>
+#include <QVector>
 
 #include "graph.h"
 
@@ -34,7 +35,16 @@ private:
     QAction *expandCalculatorAction;
     QMenu *fileMenu;
     QLineEdit *inputXLineEdit;
+    QLineEdit *inputXlineEdit_min;
+    QLineEdit *inputXlineEdit_max;
+    QLineEdit *inputYlineEdit_min;
+    QLineEdit *inputYlineEdit_max;
     Graph *graph_ui;
+
+    double h, X;
+    int N;
+
+    QVector<double> x,y;
 };
 
 #endif // MAINWINDOW_H

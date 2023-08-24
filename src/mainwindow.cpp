@@ -3,6 +3,8 @@
 #include <QMenuBar>
 #include <QPropertyAnimation>
 
+#include "graph.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -19,6 +21,10 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
     inputXLineEdit = ui->lineEdit_x;
+    inputXlineEdit_min = ui->lineEdit_x_min_graph;
+    inputXlineEdit_max = ui->lineEdit_x_max_graph;
+    inputYlineEdit_min = ui->lineEdit_y_min_graph;
+    inputYlineEdit_max = ui->lineEdit_y_max_graph;
 
     expandCalculatorAction = new QAction(tr("Expand Calculator"), this);
     fileMenu = menuBar()->addMenu(tr("&CALC"));
@@ -60,7 +66,6 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->pushButton_ac, SIGNAL(clicked()),this, SLOT(clearText()));
     connect(ui->pushButton_sqrt, SIGNAL(clicked()),this, SLOT(add_lexems()));
     connect(ui->pushButton_res, SIGNAL(clicked()),this, SLOT(calc_result()));
-    //connect(ui->pushButton_graph, SIGNAL(clicked()),this, SLOT(on_pushButton_graph_clicked()));
 }
 
 MainWindow::~MainWindow()
@@ -98,7 +103,6 @@ void MainWindow::add_lexems()
 
     ui->show_res->setText(new_label);
 
-    // Добавляем отладочное сообщение
     qDebug() << "add_lexems() - New label:" << new_label;
 }
 
@@ -110,7 +114,11 @@ void MainWindow::clearText()
 void MainWindow::calc_result()
 {
     QString exec = ui->show_res->text();
-    const char *math_expression = exec.toLatin1();
+    qDebug() << "calc_result() - Result2:" << exec;
+    std::string math_exp_str = exec.toStdString();
+    const char *math_expression = math_exp_str.c_str();
+    //QString str = QString::fromStdString(math_expression);
+    //qDebug() << "calc_result() - Result:" << str;
     char *temp_str = NULL;
     QString xInput = inputXLineEdit->text();
     double xValue = xInput.toDouble();
@@ -134,11 +142,68 @@ void MainWindow::calc_result()
 }
 
 
-
-
 void MainWindow::on_pushButton_graph_clicked()
 {
+    h = 0.1;
+    QString ex = ui->show_res->text();
+    //qDebug() << "y() - Result:" << ex;
+    std::string math_exp_str = ex.toStdString();
+    const char *math_expression = math_exp_str.c_str();
+    //qDebug() << "y() - Result:" << math_exp;
+    char *temp_str = NULL;
+    QString Yres = NULL;
+    char *result = NULL;
+    const char * temps_strs = NULL;
+    double yValue = 0;
+
+    QString xBegin = inputXlineEdit_min->text();
+    double xValue_begin = xBegin.toDouble();
+
+    QString xEnd = inputXlineEdit_max->text();
+    double xValue_end = xEnd.toDouble();
+
+    QString yBegin = inputYlineEdit_min->text();
+    double yValue_begin = yBegin.toDouble();
+
+    QString yEnd = inputYlineEdit_max->text();
+    double yValue_end = yEnd.toDouble();
+
     graph_ui = new Graph(this);
+
+    graph_ui->setXAxis(xValue_begin, xValue_end);
+    graph_ui->setYAxis(yValue_begin, yValue_end);
+
+    N = (xValue_end - xValue_begin)/h + 2;
+
+    x.clear();
+    y.clear();
+    for (X = xValue_begin; X <= xValue_end; X += h)
+    {
+        qDebug() << "X() - Result:" << X;
+        temp_str = str_with_graph(math_expression, X);
+        temps_strs = temp_str;
+        result = execution(temps_strs);
+        if(result[0] != 'F')
+        {
+            Yres = result;
+            yValue = Yres.toDouble();
+            qDebug() << "Y() - Result:" << yValue;
+            x.push_back(X);
+            y.push_back(yValue);
+        }
+        else
+        {
+            x.push_back(X);
+            y.push_back(std::numeric_limits<double>::quiet_NaN());
+        }
+        free(result);
+        free(temp_str);
+        result = NULL;
+        temp_str = NULL;
+    }
+
+    graph_ui->plotGraph(x, y);
+
     graph_ui->show();
 }
 

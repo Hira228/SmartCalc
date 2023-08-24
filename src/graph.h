@@ -14,6 +14,9 @@ class Graph : public QDialog
 public:
     explicit Graph(QWidget *parent = nullptr);
     ~Graph();
+    void setXAxis(double x_min, double x_max);
+    void setYAxis(double y_min, double y_max);
+    void plotGraph(QVector<double> x, QVector<double> y);
 
 private:
     Ui::Graph *ui;
