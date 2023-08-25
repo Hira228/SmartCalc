@@ -21,6 +21,9 @@ set(PROJECT_SOURCES
         graph.h
         graph.ui
         graph.cpp
+        creditcalc.h
+        creditcalc.cpp
+        creditcalc.ui
         mainwindow.ui
 )
 

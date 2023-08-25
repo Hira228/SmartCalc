@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>794</width>
-    <height>380</height>
+    <width>791</width>
+    <height>360</height>
    </rect>
   </property>
   <property name="font">
@@ -1326,6 +1326,9 @@ QPushButton:pressed {
     </property>
    </widget>
    <widget class="QLabel" name="show_res_8">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>370</x>
@@ -1505,6 +1508,21 @@ QPushButton:pressed {
     </property>
    </widget>
   </widget>
+  <action name="actionExtended_Calc">
+   <property name="text">
+    <string>Extended Calc</string>
+   </property>
+  </action>
+  <action name="actionExtanded_Calc">
+   <property name="text">
+    <string>Extanded Calc</string>
+   </property>
+  </action>
+  <action name="actionCredit_Calc">
+   <property name="text">
+    <string>Credit Calc</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>

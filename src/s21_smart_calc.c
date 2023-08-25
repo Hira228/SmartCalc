@@ -118,7 +118,6 @@ int calculate(struct Data **stack_reverse_polish_notation, struct Data **stack_c
             case COS:
                 if (flag_error == SUCCESS) push_back(stack_calc, cos(a), NUMBER, 0);
                 break;
-
             case SQRT:
                 if (flag_error != FAILURE && a >= 0.0f) push_back(stack_calc, sqrt(a), NUMBER, 0);
                 else flag_error = FAILURE;
@@ -219,14 +218,12 @@ int reverse_polish_notation(struct Data **reverse_stack, struct Data **stack_pol
     int flag_error = SUCCESS;
     int flag_unary = SUCCESS;
     struct Data *stack_operator = NULL;
-
     while(!stack_is_empty(*reverse_stack) && flag_error == SUCCESS)
     {
         if (flag_unary == UNARY_MINUS)
         {
             pop_back_op(reverse_stack);
         }
-
         struct Data *temp = *reverse_stack;
 
         if(temp -> type == NUMBER)

@@ -2,8 +2,10 @@
 #include "ui_mainwindow.h"
 #include <QMenuBar>
 #include <QPropertyAnimation>
+#include <QtMath>
 
 #include "graph.h"
+#include "creditcalc.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -27,13 +29,19 @@ MainWindow::MainWindow(QWidget *parent)
     inputYlineEdit_max = ui->lineEdit_y_max_graph;
 
     expandCalculatorAction = new QAction(tr("Expand Calculator"), this);
+    creditCalculatorAction = new QAction(tr("Credit Calculator"), this); // Обратите внимание на изменение имени переменной
+
     fileMenu = menuBar()->addMenu(tr("&CALC"));
     fileMenu->addAction(expandCalculatorAction);
+    fileMenu->addAction(creditCalculatorAction); // Используйте creditCalculatorAction здесь
 
     QString menuBarStyle = "background-color: rgb(255, 255, 255);";
     menuBar()->setStyleSheet(menuBarStyle);
 
     connect(expandCalculatorAction, &QAction::triggered, this, &MainWindow::expandWindow);
+    connect(creditCalculatorAction, &QAction::triggered, this, &MainWindow::CreditCalc);
+    // Предположим, что у вас также есть connect для creditCalculatorAction
+
 
     connect(ui->pushButton_zero, SIGNAL(clicked()),this, SLOT(add_lexems()));
     connect(ui->pushButton_x, SIGNAL(clicked()),this, SLOT(add_lexems()));
@@ -73,19 +81,27 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+
+
 void MainWindow::expandWindow()
 {
     QPropertyAnimation *animation = new QPropertyAnimation(this, "geometry");
 
-    if (width() == 794) {
-        animation->setEndValue(QRect(geometry().x(), geometry().y(), 361, 380));
+    if (width() == 791) {
+        animation->setEndValue(QRect(geometry().x(), geometry().y(), 361, 360));
     } else {
-        animation->setEndValue(QRect(geometry().x(), geometry().y(), 794, 380));
+        animation->setEndValue(QRect(geometry().x(), geometry().y(), 791, 360));
     }
     animation->setDuration(500);
     animation->setEasingCurve(QEasingCurve::InOutQuad);
 
     animation->start(QAbstractAnimation::DeleteWhenStopped);
+}
+
+void MainWindow::CreditCalc()
+{
+    creditcalc_ui = new class CreditCalc(this);
+    creditcalc_ui->show();
 }
 
 void MainWindow::add_lexems()
@@ -114,7 +130,7 @@ void MainWindow::clearText()
 void MainWindow::calc_result()
 {
     QString exec = ui->show_res->text();
-    qDebug() << "calc_result() - Result2:" << exec;
+    //qDebug() << "calc_result() - Result2:" << exec;
     std::string math_exp_str = exec.toStdString();
     const char *math_expression = math_exp_str.c_str();
     //QString str = QString::fromStdString(math_expression);
@@ -138,12 +154,13 @@ void MainWindow::calc_result()
     free(result);
     free(temp_str);
 
-    qDebug() << "calc_result() - Result:" << resultStr;
+    //qDebug() << "calc_result() - Result:" << resultStr;
 }
 
 
 void MainWindow::on_pushButton_graph_clicked()
 {
+    double pi = M_PI;
     h = 0.1;
     QString ex = ui->show_res->text();
     //qDebug() << "y() - Result:" << ex;
@@ -179,7 +196,7 @@ void MainWindow::on_pushButton_graph_clicked()
     y.clear();
     for (X = xValue_begin; X <= xValue_end; X += h)
     {
-        qDebug() << "X() - Result:" << X;
+        //qDebug() << "X() - Result:" << X;
         temp_str = str_with_graph(math_expression, X);
         temps_strs = temp_str;
         result = execution(temps_strs);
@@ -187,7 +204,7 @@ void MainWindow::on_pushButton_graph_clicked()
         {
             Yres = result;
             yValue = Yres.toDouble();
-            qDebug() << "Y() - Result:" << yValue;
+            //qDebug() << "Y() - Result:" << yValue;
             x.push_back(X);
             y.push_back(yValue);
         }
@@ -201,6 +218,26 @@ void MainWindow::on_pushButton_graph_clicked()
         result = NULL;
         temp_str = NULL;
     }
+    temp_str = str_with_graph(math_expression, M_PI);
+    temps_strs = temp_str;
+    result = execution(temps_strs);
+    if(result[0] != 'F')
+    {
+        Yres = result;
+        yValue = Yres.toDouble();
+        qDebug() << "Y() - Result:" << result;
+        x.push_back(M_PI);
+        y.push_back(yValue);
+    }
+    else
+    {
+        x.push_back(M_PI);
+        y.push_back(std::numeric_limits<double>::quiet_NaN());
+    }
+    free(result);
+    free(temp_str);
+    result = NULL;
+    temp_str = NULL;
 
     graph_ui->plotGraph(x, y);
 

@@ -5,6 +5,7 @@
 #include <QLineEdit>
 #include <QVector>
 
+#include "creditcalc.h"
 #include "graph.h"
 
 QT_BEGIN_NAMESPACE
@@ -24,6 +25,7 @@ private slots:
 
 private slots:
     void expandWindow();
+    void CreditCalc();
 
 private slots:
     void add_lexems();
@@ -33,6 +35,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
     QAction *expandCalculatorAction;
+    QAction *creditCalculatorAction;
     QMenu *fileMenu;
     QLineEdit *inputXLineEdit;
     QLineEdit *inputXlineEdit_min;
@@ -40,6 +43,9 @@ private:
     QLineEdit *inputYlineEdit_min;
     QLineEdit *inputYlineEdit_max;
     Graph *graph_ui;
+    class CreditCalc *creditcalc_ui;
+
+
 
     double h, X;
     int N;
