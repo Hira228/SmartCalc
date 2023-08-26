@@ -15,19 +15,19 @@ public:
     explicit CreditCalc(QWidget *parent = nullptr);
     ~CreditCalc();
 
-//private slots:
-//    void handle_on_pushButton3_clicked();
+private slots:
+    void on_pushButton_3_clicked();
 
 private slots:
-    void handle_on_comboBox_currentIndexChanged(int index);
+    void on_comboBox_currentIndexChanged(int index);
 
 private:
     Ui::CreditCalc *ui;
 
-//    double sum_credit;
-//    double interest_rate;
-//    double pay;
-//    int deadline;
+    double sum_credit;
+    double interest_rate;
+    double pay;
+    int deadline;
 };
 
 #endif // CREDITCALC_H

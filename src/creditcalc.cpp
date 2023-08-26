@@ -7,7 +7,7 @@ CreditCalc::CreditCalc(QWidget *parent) :
     ui(new Ui::CreditCalc)
 {
     ui->setupUi(this);
-    //connect(ui->pushButton_3, SIGNAL(clicked()),this, SLOT(handle_on_pushButton3_clicked()));
+    connect(ui->pushButton_3, SIGNAL(clicked()),this, SLOT(on_pushButton3_clicked()));
 }
 
 CreditCalc::~CreditCalc()
@@ -16,7 +16,7 @@ CreditCalc::~CreditCalc()
 }
 
 
-void CreditCalc::handle_on_comboBox_currentIndexChanged(int index)
+void CreditCalc::on_comboBox_currentIndexChanged(int index)
 {
     if (index == 0) ui->stackedWidget->setCurrentWidget(ui->page_1);
     if (index == 1) ui->stackedWidget->setCurrentWidget(ui->page_2);
@@ -24,21 +24,20 @@ void CreditCalc::handle_on_comboBox_currentIndexChanged(int index)
 }
 
 
-//void CreditCalc::handle_on_pushButton3_clicked()
-//{
-//    QString deadline_str = ui->lineEdit_11->text();
-//    deadline = deadline_str.toInt();
-//    qDebug() << "срок() - Result:" << deadline;
+void CreditCalc::on_pushButton_3_clicked()
+{
+    QString deadline_str = ui->lineEdit_11->text();
+    deadline = deadline_str.toInt();
+    qDebug() << "срок() - Result:" << deadline;
 
-//    QString pay_str = ui->lineEdit_10->text();
-//    pay = pay_str.toDouble();
-//    qDebug() << "платеж() - Result:" << pay;
+    QString pay_str = ui->lineEdit_10->text();
+    pay = pay_str.toDouble();
+    qDebug() << "платеж() - Result:" << pay;
 
-//    QString interest_rate_str = ui->lineEdit_9->text();
-//    qDebug() << "проц став() - Result:" << interest_rate_str;
-//    interest_rate = interest_rate_str.toDouble();
-//    qDebug() << "проц став() - Result:" << interest_rate;
+    QString interest_rate_str = ui->lineEdit_9->text();
+    qDebug() << "проц став() - Result:" << interest_rate_str;
+    interest_rate = interest_rate_str.toDouble();
+    qDebug() << "проц став() - Result:" << interest_rate;
 
 
-//}
-
+}
