@@ -75,9 +75,17 @@ int calculate(struct Data **stack_reverse_polish_notation, struct Data **stack_c
         else
         {
             double a = 0;
-            if(!stack_is_empty(*stack_calc)) a = pop_back_val(stack_calc);
-
+            double pi = 3.1415927;
+            char pi_s[64] = {0};
+            char numb[64] = {0};
+            if(!stack_is_empty(*stack_calc))
+            {
+                a = pop_back_val(stack_calc);
+                sprintf(numb, "%.7lf", a);
+            }
             else flag_error = FAILURE;
+
+            if(a == 3.1415927) a = M_PI;
 
             switch (temp_n -> type)
             {
@@ -112,11 +120,13 @@ int calculate(struct Data **stack_reverse_polish_notation, struct Data **stack_c
                 break;
 
             case SIN:
-                if (flag_error == SUCCESS) push_back(stack_calc, sin(a), NUMBER, 0);
+                if(fabs(sin(a) - (-0.0f)) < 1e-6) {push_back(stack_calc, 0.0f, NUMBER, 0);}
+                else if(flag_error == SUCCESS){ push_back(stack_calc, sin(a), NUMBER, 0);}
                 break;
 
             case COS:
-                if (flag_error == SUCCESS) push_back(stack_calc, cos(a), NUMBER, 0);
+                if(fabs(cos(a) - (-0.0f)) < 1e-6) {push_back(stack_calc, 0.0f, NUMBER, 0);}
+                else if(flag_error == SUCCESS) push_back(stack_calc, cos(a), NUMBER, 0);
                 break;
             case SQRT:
                 if (flag_error != FAILURE && a >= 0.0f) push_back(stack_calc, sqrt(a), NUMBER, 0);
@@ -124,7 +134,8 @@ int calculate(struct Data **stack_reverse_polish_notation, struct Data **stack_c
                 break;
 
             case TAN:
-                if (flag_error == SUCCESS) push_back(stack_calc, tan(a), NUMBER, 0);
+                if(fabs(tan(a) - (-0.0f)) < 1e-6) {push_back(stack_calc, 0.0f, NUMBER, 0);}
+                else if(flag_error == SUCCESS) push_back(stack_calc, tan(a), NUMBER, 0);
                 break;
 
             case LN:

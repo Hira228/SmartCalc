@@ -125,10 +125,24 @@ CMakeFiles/calculator.dir/graph.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/calculator.dir/graph.cpp.s"
 	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/gradyzan/C7_SmartCalc_v1.0-1/src/graph.cpp -o CMakeFiles/calculator.dir/graph.cpp.s
 
+CMakeFiles/calculator.dir/creditcalc.cpp.o: CMakeFiles/calculator.dir/flags.make
+CMakeFiles/calculator.dir/creditcalc.cpp.o: /Users/gradyzan/C7_SmartCalc_v1.0-1/src/creditcalc.cpp
+CMakeFiles/calculator.dir/creditcalc.cpp.o: CMakeFiles/calculator.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/gradyzan/C7_SmartCalc_v1.0-1/build-src-Desktop_x86_darwin_generic_mach_o_64bit-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/calculator.dir/creditcalc.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/calculator.dir/creditcalc.cpp.o -MF CMakeFiles/calculator.dir/creditcalc.cpp.o.d -o CMakeFiles/calculator.dir/creditcalc.cpp.o -c /Users/gradyzan/C7_SmartCalc_v1.0-1/src/creditcalc.cpp
+
+CMakeFiles/calculator.dir/creditcalc.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/calculator.dir/creditcalc.cpp.i"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/gradyzan/C7_SmartCalc_v1.0-1/src/creditcalc.cpp > CMakeFiles/calculator.dir/creditcalc.cpp.i
+
+CMakeFiles/calculator.dir/creditcalc.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/calculator.dir/creditcalc.cpp.s"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/gradyzan/C7_SmartCalc_v1.0-1/src/creditcalc.cpp -o CMakeFiles/calculator.dir/creditcalc.cpp.s
+
 CMakeFiles/calculator.dir/s21_smart_calc.c.o: CMakeFiles/calculator.dir/flags.make
 CMakeFiles/calculator.dir/s21_smart_calc.c.o: /Users/gradyzan/C7_SmartCalc_v1.0-1/src/s21_smart_calc.c
 CMakeFiles/calculator.dir/s21_smart_calc.c.o: CMakeFiles/calculator.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/gradyzan/C7_SmartCalc_v1.0-1/build-src-Desktop_x86_darwin_generic_mach_o_64bit-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/calculator.dir/s21_smart_calc.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/gradyzan/C7_SmartCalc_v1.0-1/build-src-Desktop_x86_darwin_generic_mach_o_64bit-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/calculator.dir/s21_smart_calc.c.o"
 	/usr/bin/clang $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/calculator.dir/s21_smart_calc.c.o -MF CMakeFiles/calculator.dir/s21_smart_calc.c.o.d -o CMakeFiles/calculator.dir/s21_smart_calc.c.o -c /Users/gradyzan/C7_SmartCalc_v1.0-1/src/s21_smart_calc.c
 
 CMakeFiles/calculator.dir/s21_smart_calc.c.i: cmake_force
@@ -145,6 +159,7 @@ calculator_OBJECTS = \
 "CMakeFiles/calculator.dir/main.cpp.o" \
 "CMakeFiles/calculator.dir/mainwindow.cpp.o" \
 "CMakeFiles/calculator.dir/graph.cpp.o" \
+"CMakeFiles/calculator.dir/creditcalc.cpp.o" \
 "CMakeFiles/calculator.dir/s21_smart_calc.c.o"
 
 # External object files for target calculator
@@ -154,6 +169,7 @@ calculator.app/Contents/MacOS/calculator: CMakeFiles/calculator.dir/calculator_a
 calculator.app/Contents/MacOS/calculator: CMakeFiles/calculator.dir/main.cpp.o
 calculator.app/Contents/MacOS/calculator: CMakeFiles/calculator.dir/mainwindow.cpp.o
 calculator.app/Contents/MacOS/calculator: CMakeFiles/calculator.dir/graph.cpp.o
+calculator.app/Contents/MacOS/calculator: CMakeFiles/calculator.dir/creditcalc.cpp.o
 calculator.app/Contents/MacOS/calculator: CMakeFiles/calculator.dir/s21_smart_calc.c.o
 calculator.app/Contents/MacOS/calculator: CMakeFiles/calculator.dir/build.make
 calculator.app/Contents/MacOS/calculator: /Users/gradyzan/C7_SmartCalc_v1.0-1/src/build/output/amd64/Debug/lib/libqcustomplot.2.1.1.1.dylib
@@ -163,7 +179,7 @@ calculator.app/Contents/MacOS/calculator: /usr/local/lib/QtGui.framework/Version
 calculator.app/Contents/MacOS/calculator: /usr/local/lib/QtCore.framework/Versions/A/QtCore
 calculator.app/Contents/MacOS/calculator: /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/usr/lib/libcups.tbd
 calculator.app/Contents/MacOS/calculator: CMakeFiles/calculator.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/gradyzan/C7_SmartCalc_v1.0-1/build-src-Desktop_x86_darwin_generic_mach_o_64bit-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable calculator.app/Contents/MacOS/calculator"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/gradyzan/C7_SmartCalc_v1.0-1/build-src-Desktop_x86_darwin_generic_mach_o_64bit-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable calculator.app/Contents/MacOS/calculator"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/calculator.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

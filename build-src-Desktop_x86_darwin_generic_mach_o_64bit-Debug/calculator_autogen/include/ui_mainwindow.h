@@ -10,6 +10,7 @@
 #define UI_MAINWINDOW_H
 
 #include <QtCore/QVariant>
+#include <QtGui/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QFrame>
 #include <QtWidgets/QLabel>
@@ -23,6 +24,9 @@ QT_BEGIN_NAMESPACE
 class Ui_MainWindow
 {
 public:
+    QAction *actionExtended_Calc;
+    QAction *actionExtanded_Calc;
+    QAction *actionCredit_Calc;
     QWidget *centralwidget;
     QLabel *show_res;
     QPushButton *pushButton_seven;
@@ -80,11 +84,17 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(794, 380);
+        MainWindow->resize(791, 360);
         QFont font;
         font.setFamilies({QString::fromUtf8("Terminal")});
         MainWindow->setFont(font);
         MainWindow->setStyleSheet(QString::fromUtf8("background-color: rgb(28, 28, 28);"));
+        actionExtended_Calc = new QAction(MainWindow);
+        actionExtended_Calc->setObjectName(QString::fromUtf8("actionExtended_Calc"));
+        actionExtanded_Calc = new QAction(MainWindow);
+        actionExtanded_Calc->setObjectName(QString::fromUtf8("actionExtanded_Calc"));
+        actionCredit_Calc = new QAction(MainWindow);
+        actionCredit_Calc->setObjectName(QString::fromUtf8("actionCredit_Calc"));
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         show_res = new QLabel(centralwidget);
@@ -696,6 +706,7 @@ public:
 "    background-color: rgb(68, 148, 74);\n"
 "    color: white;\n"
 "    border: 1px solid grey;\n"
+"border-radius: 15px;\n"
 "}\n"
 "\n"
 "QPushButton:pressed {\n"
@@ -743,12 +754,14 @@ public:
         font4.setPointSize(20);
         show_res_4->setFont(font4);
         show_res_4->setStyleSheet(QString::fromUtf8(" background-color : white;\n"
+"border-radius: 15px;\n"
 ""));
         show_res_5 = new QLabel(centralwidget);
         show_res_5->setObjectName(QString::fromUtf8("show_res_5"));
         show_res_5->setGeometry(QRect(590, 204, 71, 41));
         show_res_5->setFont(font4);
         show_res_5->setStyleSheet(QString::fromUtf8(" background-color : white;\n"
+"border-radius: 15px;\n"
 ""));
         show_res_7 = new QLabel(centralwidget);
         show_res_7->setObjectName(QString::fromUtf8("show_res_7"));
@@ -759,9 +772,11 @@ public:
 ""));
         show_res_8 = new QLabel(centralwidget);
         show_res_8->setObjectName(QString::fromUtf8("show_res_8"));
+        show_res_8->setEnabled(true);
         show_res_8->setGeometry(QRect(370, 290, 61, 61));
         show_res_8->setFont(font4);
         show_res_8->setStyleSheet(QString::fromUtf8(" background-color : white;\n"
+"border-radius: 15px;\n"
 ""));
         lineEdit_x = new QLineEdit(centralwidget);
         lineEdit_x->setObjectName(QString::fromUtf8("lineEdit_x"));
@@ -798,12 +813,14 @@ public:
         show_res_6->setGeometry(QRect(590, 257, 71, 41));
         show_res_6->setFont(font4);
         show_res_6->setStyleSheet(QString::fromUtf8(" background-color : white;\n"
+"border-radius: 15px;\n"
 ""));
         show_res_9 = new QLabel(centralwidget);
         show_res_9->setObjectName(QString::fromUtf8("show_res_9"));
         show_res_9->setGeometry(QRect(590, 310, 71, 41));
         show_res_9->setFont(font4);
         show_res_9->setStyleSheet(QString::fromUtf8(" background-color : white;\n"
+"border-radius: 15px;\n"
 ""));
         MainWindow->setCentralWidget(centralwidget);
 
@@ -815,6 +832,9 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
+        actionExtended_Calc->setText(QCoreApplication::translate("MainWindow", "Extended Calc", nullptr));
+        actionExtanded_Calc->setText(QCoreApplication::translate("MainWindow", "Extanded Calc", nullptr));
+        actionCredit_Calc->setText(QCoreApplication::translate("MainWindow", "Credit Calc", nullptr));
         show_res->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
         pushButton_seven->setText(QCoreApplication::translate("MainWindow", "7", nullptr));
         pushButton_eight->setText(QCoreApplication::translate("MainWindow", "8", nullptr));
@@ -851,8 +871,8 @@ public:
         pushButton_graph->setText(QCoreApplication::translate("MainWindow", "GRAPH", nullptr));
         show_res_4->setText(QCoreApplication::translate("MainWindow", " Xmin", nullptr));
         show_res_5->setText(QCoreApplication::translate("MainWindow", " Ymin", nullptr));
-        show_res_7->setText(QCoreApplication::translate("MainWindow", "  Plotting Window", nullptr));
-        show_res_8->setText(QCoreApplication::translate("MainWindow", "  x =", nullptr));
+        show_res_7->setText(QCoreApplication::translate("MainWindow", "      Plotting Window", nullptr));
+        show_res_8->setText(QCoreApplication::translate("MainWindow", "  x  =", nullptr));
         lineEdit_x->setPlaceholderText(QCoreApplication::translate("MainWindow", "0", nullptr));
         lineEdit_x_min_graph->setPlaceholderText(QCoreApplication::translate("MainWindow", "0", nullptr));
         lineEdit_y_min_graph->setPlaceholderText(QCoreApplication::translate("MainWindow", "0", nullptr));

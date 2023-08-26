@@ -237,6 +237,30 @@ calculator_autogen/mocs_compilation.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/calculator.dir/build.make CMakeFiles/calculator.dir/calculator_autogen/mocs_compilation.cpp.s
 .PHONY : calculator_autogen/mocs_compilation.cpp.s
 
+creditcalc.o: creditcalc.cpp.o
+.PHONY : creditcalc.o
+
+# target to build an object file
+creditcalc.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/calculator.dir/build.make CMakeFiles/calculator.dir/creditcalc.cpp.o
+.PHONY : creditcalc.cpp.o
+
+creditcalc.i: creditcalc.cpp.i
+.PHONY : creditcalc.i
+
+# target to preprocess a source file
+creditcalc.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/calculator.dir/build.make CMakeFiles/calculator.dir/creditcalc.cpp.i
+.PHONY : creditcalc.cpp.i
+
+creditcalc.s: creditcalc.cpp.s
+.PHONY : creditcalc.s
+
+# target to generate assembly for a file
+creditcalc.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/calculator.dir/build.make CMakeFiles/calculator.dir/creditcalc.cpp.s
+.PHONY : creditcalc.cpp.s
+
 graph.o: graph.cpp.o
 .PHONY : graph.o
 
@@ -352,6 +376,9 @@ help:
 	@echo "... calculator_autogen/mocs_compilation.o"
 	@echo "... calculator_autogen/mocs_compilation.i"
 	@echo "... calculator_autogen/mocs_compilation.s"
+	@echo "... creditcalc.o"
+	@echo "... creditcalc.i"
+	@echo "... creditcalc.s"
 	@echo "... graph.o"
 	@echo "... graph.i"
 	@echo "... graph.s"

@@ -4,6 +4,8 @@ file(REMOVE_RECURSE
   "calculator_autogen"
   "CMakeFiles/calculator.dir/calculator_autogen/mocs_compilation.cpp.o"
   "CMakeFiles/calculator.dir/calculator_autogen/mocs_compilation.cpp.o.d"
+  "CMakeFiles/calculator.dir/creditcalc.cpp.o"
+  "CMakeFiles/calculator.dir/creditcalc.cpp.o.d"
   "CMakeFiles/calculator.dir/graph.cpp.o"
   "CMakeFiles/calculator.dir/graph.cpp.o.d"
   "CMakeFiles/calculator.dir/main.cpp.o"

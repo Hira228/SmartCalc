@@ -49,7 +49,7 @@
 			{
 				"command" : 3,
 				"file" : 1,
-				"line" : 28,
+				"line" : 31,
 				"parent" : 0
 			},
 			{
@@ -73,19 +73,19 @@
 			{
 				"command" : 4,
 				"file" : 1,
-				"line" : 71,
+				"line" : 74,
 				"parent" : 0
 			},
 			{
 				"command" : 5,
 				"file" : 1,
-				"line" : 52,
+				"line" : 55,
 				"parent" : 0
 			},
 			{
 				"command" : 5,
 				"file" : 1,
-				"line" : 54,
+				"line" : 57,
 				"parent" : 0
 			},
 			{
@@ -255,7 +255,7 @@
 			{
 				"command" : 11,
 				"file" : 1,
-				"line" : 53,
+				"line" : 56,
 				"parent" : 0
 			}
 		]
@@ -375,7 +375,8 @@
 				0,
 				1,
 				2,
-				6
+				6,
+				8
 			]
 		},
 		{
@@ -476,19 +477,19 @@
 			"language" : "C",
 			"sourceIndexes" : 
 			[
-				9
+				12
 			]
 		}
 	],
 	"dependencies" : 
 	[
 		{
-			"backtrace" : 6,
-			"id" : "qcustomplot::@fc532ac5826d76d47071"
-		},
-		{
 			"backtrace" : 0,
 			"id" : "calculator_autogen::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 6,
+			"id" : "qcustomplot::@fc532ac5826d76d47071"
 		}
 	],
 	"id" : "calculator::@6890427a1f51a3e7e1df",
@@ -618,7 +619,8 @@
 				1,
 				2,
 				6,
-				9
+				8,
+				12
 			]
 		},
 		{
@@ -627,9 +629,11 @@
 			[
 				3,
 				4,
-				8,
-				10,
-				11
+				7,
+				11,
+				13,
+				14,
+				15
 			]
 		},
 		{
@@ -637,7 +641,8 @@
 			"sourceIndexes" : 
 			[
 				5,
-				7
+				9,
+				10
 			]
 		}
 	],
@@ -685,6 +690,22 @@
 		},
 		{
 			"backtrace" : 4,
+			"path" : "creditcalc.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 4,
+			"compileGroupIndex" : 0,
+			"path" : "creditcalc.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 4,
+			"path" : "creditcalc.ui",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 4,
 			"path" : "mainwindow.ui",
 			"sourceGroupIndex" : 2
 		},
@@ -703,6 +724,12 @@
 			"backtrace" : 0,
 			"isGenerated" : true,
 			"path" : "/Users/gradyzan/C7_SmartCalc_v1.0-1/build-src-Desktop_x86_darwin_generic_mach_o_64bit-Debug/calculator_autogen/include/ui_graph.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "/Users/gradyzan/C7_SmartCalc_v1.0-1/build-src-Desktop_x86_darwin_generic_mach_o_64bit-Debug/calculator_autogen/include/ui_creditcalc.h",
 			"sourceGroupIndex" : 1
 		},
 		{
