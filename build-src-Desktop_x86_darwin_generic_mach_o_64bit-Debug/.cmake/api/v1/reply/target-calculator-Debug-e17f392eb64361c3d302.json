@@ -484,12 +484,12 @@
 	"dependencies" : 
 	[
 		{
-			"backtrace" : 0,
-			"id" : "calculator_autogen::@6890427a1f51a3e7e1df"
-		},
-		{
 			"backtrace" : 6,
 			"id" : "qcustomplot::@fc532ac5826d76d47071"
+		},
+		{
+			"backtrace" : 0,
+			"id" : "calculator_autogen::@6890427a1f51a3e7e1df"
 		}
 	],
 	"id" : "calculator::@6890427a1f51a3e7e1df",

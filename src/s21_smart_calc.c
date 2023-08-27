@@ -75,7 +75,7 @@ int calculate(struct Data **stack_reverse_polish_notation, struct Data **stack_c
         else
         {
             double a = 0;
-            double pi = 3.1415927;
+            double pi = 3.14;
             char pi_s[64] = {0};
             char numb[64] = {0};
             if(!stack_is_empty(*stack_calc))
@@ -84,9 +84,6 @@ int calculate(struct Data **stack_reverse_polish_notation, struct Data **stack_c
                 sprintf(numb, "%.7lf", a);
             }
             else flag_error = FAILURE;
-
-            if(a == 3.1415927) a = M_PI;
-
             switch (temp_n -> type)
             {
             case PLUS:
@@ -111,7 +108,7 @@ int calculate(struct Data **stack_reverse_polish_notation, struct Data **stack_c
 
             case POW:
                 if(stack_is_empty(*stack_calc)) flag_error = FAILURE;
-                else push_back(stack_calc, powl(pop_back_val(stack_calc), a), NUMBER, 0);
+                else push_back(stack_calc, powf(pop_back_val(stack_calc), a), NUMBER, 0);
                 break;
 
             case MOD:
@@ -120,11 +117,13 @@ int calculate(struct Data **stack_reverse_polish_notation, struct Data **stack_c
                 break;
 
             case SIN:
+                if(a >= 3.14 && a <= 3.1415927) a = M_PI;
                 if(fabs(sin(a) - (-0.0f)) < 1e-6) {push_back(stack_calc, 0.0f, NUMBER, 0);}
                 else if(flag_error == SUCCESS){ push_back(stack_calc, sin(a), NUMBER, 0);}
                 break;
 
             case COS:
+                if(a >= 3.14 && a <= 3.1415927) a = M_PI;
                 if(fabs(cos(a) - (-0.0f)) < 1e-6) {push_back(stack_calc, 0.0f, NUMBER, 0);}
                 else if(flag_error == SUCCESS) push_back(stack_calc, cos(a), NUMBER, 0);
                 break;
@@ -134,6 +133,7 @@ int calculate(struct Data **stack_reverse_polish_notation, struct Data **stack_c
                 break;
 
             case TAN:
+                if(a >= 3.14 && a <= 3.1415927) a = M_PI;
                 if(fabs(tan(a) - (-0.0f)) < 1e-6) {push_back(stack_calc, 0.0f, NUMBER, 0);}
                 else if(flag_error == SUCCESS) push_back(stack_calc, tan(a), NUMBER, 0);
                 break;

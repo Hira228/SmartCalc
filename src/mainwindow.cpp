@@ -160,7 +160,7 @@ void MainWindow::calc_result()
 
 void MainWindow::on_pushButton_graph_clicked()
 {
-    double pi = 3.1415927;
+    double pi = 3.14;
     h = 0.1;
     QString ex = ui->show_res->text();
     //qDebug() << "y() - Result:" << ex;
@@ -172,6 +172,8 @@ void MainWindow::on_pushButton_graph_clicked()
     char *result = NULL;
     const char * temps_strs = NULL;
     double yValue = 0;
+    double a_temp = 0;
+    int flag_minus = 0;
 
     QString xBegin = inputXlineEdit_min->text();
     double xValue_begin = xBegin.toDouble();
@@ -219,32 +221,23 @@ void MainWindow::on_pushButton_graph_clicked()
         result = NULL;
         temp_str = NULL;
     }
-    double nearest_pi_multiple = roundf(xValue_begin / (pi/2)) * pi/2;
-    qDebug() << "RES() - Result:" << nearest_pi_multiple;
-    for(X = nearest_pi_multiple; X <= xValue_end; X += pi/2)
-    {
-        temp_str = str_with_graph(math_expression, X);
-        temps_strs = temp_str;
-        result = execution(temps_strs);
-        if(result[0] != 'F')
-        {
-            Yres = result;
-            yValue = Yres.toFloat();
-            x.push_back(X);
-            y.push_back(yValue);
-            //qDebug() << "RES() - Result:" << yValue;
-        }
-        else
-        {
-            x.push_back(X);
-            y.push_back(std::numeric_limits<double>::quiet_NaN());
-            //qDebug() << "RES() - Result:" << yValue;
-        }
-        free(result);
-        free(temp_str);
-        result = NULL;
-        temp_str = NULL;
-    }
+//    double nearest_pi_multiple = roundf(xValue_begin / (pi/2)) * pi/2;
+//    qDebug() << "RES() - Result:" << nearest_pi_multiple;
+//    for(X = xValue_begin; X <= xValue_end; X += 0.01)
+//    {
+//        temp_str = str_with_graph(math_expression, X);
+//        temps_strs = temp_str;
+//        result = execution(temps_strs);
+//        if(result[0] == 'F')
+//        {
+//            x.push_back(X);
+//            y.push_back(std::numeric_limits<double>::quiet_NaN());
+//        }
+//        free(result);
+//        free(temp_str);
+//        result = NULL;
+//        temp_str = NULL;
+//    }
 
 
     graph_ui->plotGraph(x, y);

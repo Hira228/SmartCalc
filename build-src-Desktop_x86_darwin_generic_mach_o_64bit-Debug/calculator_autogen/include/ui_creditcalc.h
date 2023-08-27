@@ -40,9 +40,9 @@ public:
     QRadioButton *radioButton;
     QRadioButton *radioButton_2;
     QLabel *label_15;
-    QLabel *label_16;
     QLabel *label_17;
     QPushButton *pushButton_1;
+    QComboBox *comboBox_3;
     QWidget *page_2;
     QLabel *label_11;
     QLabel *label_10;
@@ -61,10 +61,10 @@ public:
     QLabel *label_13;
     QLineEdit *lineEdit_9;
     QLineEdit *lineEdit_11;
-    QLabel *label_21;
     QLabel *label_22;
     QLabel *label_23;
     QPushButton *pushButton_3;
+    QComboBox *comboBox_2;
     QComboBox *comboBox;
     QLabel *label;
 
@@ -145,12 +145,6 @@ public:
         label_15->setFont(font);
         label_15->setStyleSheet(QString::fromUtf8("color:white\n"
 ""));
-        label_16 = new QLabel(page_1);
-        label_16->setObjectName(QString::fromUtf8("label_16"));
-        label_16->setGeometry(QRect(490, 90, 141, 41));
-        label_16->setFont(font);
-        label_16->setStyleSheet(QString::fromUtf8("color:white\n"
-""));
         label_17 = new QLabel(page_1);
         label_17->setObjectName(QString::fromUtf8("label_17"));
         label_17->setGeometry(QRect(490, 150, 141, 41));
@@ -170,6 +164,40 @@ public:
 "QPushButton:pressed {\n"
 "    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #555555, stop:0.48 #4e4e4e, stop:0.52 #444444, stop:1 #3d3d3d);\n"
 "    border: 1px solid #333333;\n"
+"}"));
+        comboBox_3 = new QComboBox(page_1);
+        comboBox_3->addItem(QString());
+        comboBox_3->addItem(QString());
+        comboBox_3->setObjectName(QString::fromUtf8("comboBox_3"));
+        comboBox_3->setGeometry(QRect(490, 90, 98, 41));
+        QFont font1;
+        font1.setPointSize(12);
+        comboBox_3->setFont(font1);
+        comboBox_3->setStyleSheet(QString::fromUtf8("QComboBox {\n"
+"	border: 1px solid #333333;\n"
+"	border-radius: 3px;\n"
+"	background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #797979, stop:0.48 #696969, stop:0.52 #5e5e5e, stop:1 #4f4f4f);\n"
+"	min-width: 6em;\n"
+"	color: #ffffff;\n"
+"}\n"
+"QComboBox::drop-down {\n"
+"	subcontrol-origin: padding;\n"
+"	subcontrol-position: top right;\n"
+"	width: 20px;\n"
+" \n"
+"	border-top-right-radius: 3px;\n"
+"	border-bottom-right-radius: 3px;\n"
+"}\n"
+"QComboBox::down-arrow {\n"
+"     image: url(:/images/combobox-arrow.png);\n"
+"}\n"
+" \n"
+"QComboBox QAbstractView{\n"
+"	background-color: #4f4f4f;\n"
+"	color: #999999;\n"
+" \n"
+"	selection-background-color: #999999;\n"
+"	selection-color: #4f4f4f;\n"
 "}"));
         stackedWidget->addWidget(page_1);
         page_2 = new QWidget();
@@ -275,12 +303,6 @@ public:
         lineEdit_11->setGeometry(QRect(280, 30, 201, 41));
         lineEdit_11->setStyleSheet(QString::fromUtf8("background-color:darkgray;\n"
 "color:white"));
-        label_21 = new QLabel(page_3);
-        label_21->setObjectName(QString::fromUtf8("label_21"));
-        label_21->setGeometry(QRect(490, 30, 141, 41));
-        label_21->setFont(font);
-        label_21->setStyleSheet(QString::fromUtf8("color:white\n"
-""));
         label_22 = new QLabel(page_3);
         label_22->setObjectName(QString::fromUtf8("label_22"));
         label_22->setGeometry(QRect(490, 90, 141, 41));
@@ -307,6 +329,38 @@ public:
 "    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #555555, stop:0.48 #4e4e4e, stop:0.52 #444444, stop:1 #3d3d3d);\n"
 "    border: 1px solid #333333;\n"
 "}"));
+        comboBox_2 = new QComboBox(page_3);
+        comboBox_2->addItem(QString());
+        comboBox_2->addItem(QString());
+        comboBox_2->setObjectName(QString::fromUtf8("comboBox_2"));
+        comboBox_2->setGeometry(QRect(490, 30, 98, 41));
+        comboBox_2->setFont(font1);
+        comboBox_2->setStyleSheet(QString::fromUtf8("QComboBox {\n"
+"	border: 1px solid #333333;\n"
+"	border-radius: 3px;\n"
+"	background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #797979, stop:0.48 #696969, stop:0.52 #5e5e5e, stop:1 #4f4f4f);\n"
+"	min-width: 6em;\n"
+"	color: #ffffff;\n"
+"}\n"
+"QComboBox::drop-down {\n"
+"	subcontrol-origin: padding;\n"
+"	subcontrol-position: top right;\n"
+"	width: 20px;\n"
+" \n"
+"	border-top-right-radius: 3px;\n"
+"	border-bottom-right-radius: 3px;\n"
+"}\n"
+"QComboBox::down-arrow {\n"
+"     image: url(:/images/combobox-arrow.png);\n"
+"}\n"
+" \n"
+"QComboBox QAbstractView{\n"
+"	background-color: #4f4f4f;\n"
+"	color: #999999;\n"
+" \n"
+"	selection-background-color: #999999;\n"
+"	selection-color: #4f4f4f;\n"
+"}"));
         stackedWidget->addWidget(page_3);
         comboBox = new QComboBox(CreditCalc);
         comboBox->addItem(QString());
@@ -314,8 +368,6 @@ public:
         comboBox->addItem(QString());
         comboBox->setObjectName(QString::fromUtf8("comboBox"));
         comboBox->setGeometry(QRect(280, 10, 341, 41));
-        QFont font1;
-        font1.setPointSize(12);
         comboBox->setFont(font1);
         comboBox->setStyleSheet(QString::fromUtf8("QComboBox {\n"
 "	border: 1px solid #333333;\n"
@@ -368,9 +420,11 @@ public:
         radioButton->setText(QCoreApplication::translate("CreditCalc", "\320\220\320\275\320\275\321\203\320\270\321\202\320\265\321\202\320\275\321\213\320\265", nullptr));
         radioButton_2->setText(QCoreApplication::translate("CreditCalc", "\320\224\320\270\321\204\321\204\320\265\321\200\320\265\320\275\321\206\320\270\321\200\320\276\320\262\320\260\320\275\320\275\321\213\320\265", nullptr));
         label_15->setText(QCoreApplication::translate("CreditCalc", "\342\202\275", nullptr));
-        label_16->setText(QCoreApplication::translate("CreditCalc", "\320\273\320\265\321\202", nullptr));
         label_17->setText(QCoreApplication::translate("CreditCalc", "%", nullptr));
         pushButton_1->setText(QCoreApplication::translate("CreditCalc", "\320\240\320\260\321\201\321\201\321\207\320\270\321\202\320\260\321\202\321\214", nullptr));
+        comboBox_3->setItemText(0, QCoreApplication::translate("CreditCalc", "\320\273\320\265\321\202", nullptr));
+        comboBox_3->setItemText(1, QCoreApplication::translate("CreditCalc", "\320\274\320\265\321\201\321\217\321\206\320\265\320\262", nullptr));
+
         label_11->setText(QCoreApplication::translate("CreditCalc", "\320\237\321\200\320\276\321\206\320\265\320\275\321\202\320\275\320\260\321\217 \321\201\321\202\320\260\320\262\320\272\320\260", nullptr));
         label_10->setText(QCoreApplication::translate("CreditCalc", "C\321\203\320\274\320\274\320\260 \320\272\321\200\320\265\320\264\320\270\321\202\320\260", nullptr));
         label_9->setText(QCoreApplication::translate("CreditCalc", "\320\225\320\266\320\265\320\274\320\265\321\201\321\217\321\207\320\275\321\213\320\271 \320\277\320\273\320\260\321\202\320\265\320\266", nullptr));
@@ -381,10 +435,12 @@ public:
         label_14->setText(QCoreApplication::translate("CreditCalc", "\320\237\321\200\320\276\321\206\320\265\320\275\321\202\320\275\320\260\321\217 \321\201\321\202\320\260\320\262\320\272\320\260", nullptr));
         label_12->setText(QCoreApplication::translate("CreditCalc", "\320\225\320\266\320\265\320\274\320\265\321\201\321\217\321\207\320\275\321\213\320\271 \320\277\320\273\320\260\321\202\320\265\320\266", nullptr));
         label_13->setText(QCoreApplication::translate("CreditCalc", "\320\241\321\200\320\276\320\272 \320\272\321\200\320\265\320\264\320\270\321\202\320\260", nullptr));
-        label_21->setText(QCoreApplication::translate("CreditCalc", "\320\273\320\265\321\202", nullptr));
         label_22->setText(QCoreApplication::translate("CreditCalc", "\342\202\275", nullptr));
         label_23->setText(QCoreApplication::translate("CreditCalc", "%", nullptr));
         pushButton_3->setText(QCoreApplication::translate("CreditCalc", "\320\240\320\260\321\201\321\207\320\270\321\202\320\260\321\202\321\214", nullptr));
+        comboBox_2->setItemText(0, QCoreApplication::translate("CreditCalc", "\320\273\320\265\321\202", nullptr));
+        comboBox_2->setItemText(1, QCoreApplication::translate("CreditCalc", "\320\274\320\265\321\201\321\217\321\206\320\265\320\262", nullptr));
+
         comboBox->setItemText(0, QCoreApplication::translate("CreditCalc", "\320\240\320\260\321\201\321\207\320\265\321\202 \320\265\320\266\320\265\320\274\320\265\321\201\321\217\321\207\320\275\320\276\320\263\320\276 \320\277\320\273\320\260\321\202\320\265\320\266\320\260", nullptr));
         comboBox->setItemText(1, QCoreApplication::translate("CreditCalc", "\320\240\320\260\321\201\321\207\320\265\321\202 \321\201\321\200\320\276\320\272\320\260 \320\272\321\200\320\265\320\264\320\270\321\202\320\260", nullptr));
         comboBox->setItemText(2, QCoreApplication::translate("CreditCalc", "\320\240\320\260\321\201\321\207\320\265\321\202 \320\274\320\260\320\272\321\201\320\270\320\274\320\260\320\273\321\214\320\275\320\276\320\271 \321\201\321\203\320\274\320\274\321\213 \320\272\321\200\320\265\320\264\320\270\321\202\320\260", nullptr));
