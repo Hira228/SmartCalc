@@ -1,6 +1,7 @@
 #ifndef CREDITCALC_H
 #define CREDITCALC_H
 
+#include <QPropertyAnimation>
 #include <QDialog>
 
 namespace Ui {

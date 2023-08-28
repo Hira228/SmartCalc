@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>715</width>
-    <height>349</height>
+    <height>350</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -22,7 +22,7 @@
      <x>0</x>
      <y>40</y>
      <width>711</width>
-     <height>311</height>
+     <height>511</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -130,8 +130,11 @@
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color:darkgray;
-color:white</string>
+      <string notr="true">	border: 1px solid white;
+	border-radius: 3px;
+	background: #a2a2a2;
+	min-width: 6em;
+	color: #ffffff;</string>
      </property>
     </widget>
     <widget class="QLineEdit" name="lineEdit_2">
@@ -144,8 +147,11 @@ color:white</string>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color:darkgray;
-color:white</string>
+      <string notr="true">	border: 1px solid white;
+	border-radius: 3px;
+	background: #a2a2a2;
+	min-width: 6em;
+	color: #ffffff;</string>
      </property>
     </widget>
     <widget class="QLineEdit" name="lineEdit">
@@ -158,8 +164,11 @@ color:white</string>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color:darkgray;
-color:white</string>
+      <string notr="true">	border: 1px solid white;
+	border-radius: 3px;
+	background: #a2a2a2;
+	min-width: 6em;
+	color: #ffffff;</string>
      </property>
     </widget>
     <widget class="QWidget" name="verticalLayoutWidget">
@@ -317,6 +326,204 @@ QComboBox QAbstractView{
       </property>
      </item>
     </widget>
+    <widget class="QLabel" name="label_7">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>450</y>
+       <width>171</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">
+
+	border: 1px solid white;
+	border-radius: 3px;
+	background: #a2a2a2;
+	min-width: 6em;
+	color: #ffffff;</string>
+     </property>
+     <property name="text">
+      <string>Долг + проценты</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_6">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>390</y>
+       <width>171</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">
+
+	border: 1px solid white;
+	border-radius: 3px;
+	background: #a2a2a2;
+	min-width: 6em;
+	color: #ffffff;</string>
+     </property>
+     <property name="text">
+      <string>Начисленные проценты</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_5">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>330</y>
+       <width>171</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">
+
+	border: 1px solid white;
+	border-radius: 3px;
+	background: #a2a2a2;
+	min-width: 6em;
+	color: #ffffff;</string>
+     </property>
+     <property name="text">
+      <string>Ежемесячный платеж</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_34">
+     <property name="geometry">
+      <rect>
+       <x>280</x>
+       <y>450</y>
+       <width>201</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">
+
+	border: 1px solid white;
+	border-radius: 3px;
+	background: #a2a2a2;
+	min-width: 6em;
+	color: #ffffff;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_35">
+     <property name="geometry">
+      <rect>
+       <x>280</x>
+       <y>390</y>
+       <width>201</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">
+
+	border: 1px solid white;
+	border-radius: 3px;
+	background: #a2a2a2;
+	min-width: 6em;
+	color: #ffffff;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_36">
+     <property name="geometry">
+      <rect>
+       <x>280</x>
+       <y>330</y>
+       <width>201</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">
+
+	border: 1px solid white;
+	border-radius: 3px;
+	background: #a2a2a2;
+	min-width: 6em;
+	color: #ffffff;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_40">
+     <property name="geometry">
+      <rect>
+       <x>490</x>
+       <y>330</y>
+       <width>141</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color:white
+</string>
+     </property>
+     <property name="text">
+      <string>₽</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_41">
+     <property name="geometry">
+      <rect>
+       <x>490</x>
+       <y>390</y>
+       <width>141</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color:white
+</string>
+     </property>
+     <property name="text">
+      <string>₽</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_42">
+     <property name="geometry">
+      <rect>
+       <x>490</x>
+       <y>450</y>
+       <width>141</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color:white
+</string>
+     </property>
+     <property name="text">
+      <string>₽</string>
+     </property>
+    </widget>
    </widget>
    <widget class="QWidget" name="page_2">
     <widget class="QLabel" name="label_11">
@@ -373,8 +580,11 @@ QComboBox QAbstractView{
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color:darkgray;
-color:white</string>
+      <string notr="true">	border: 1px solid white;
+	border-radius: 3px;
+	background: #a2a2a2;
+	min-width: 6em;
+	color: #ffffff;</string>
      </property>
     </widget>
     <widget class="QLabel" name="label_9">
@@ -409,8 +619,11 @@ color:white</string>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color:darkgray;
-color:white</string>
+      <string notr="true">	border: 1px solid white;
+	border-radius: 3px;
+	background: #a2a2a2;
+	min-width: 6em;
+	color: #ffffff;</string>
      </property>
     </widget>
     <widget class="QLineEdit" name="lineEdit_7">
@@ -423,8 +636,11 @@ color:white</string>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color:darkgray;
-color:white</string>
+      <string notr="true">	border: 1px solid white;
+	border-radius: 3px;
+	background: #a2a2a2;
+	min-width: 6em;
+	color: #ffffff;</string>
      </property>
     </widget>
     <widget class="QLabel" name="label_18">
@@ -497,7 +713,7 @@ color:white</string>
      <property name="geometry">
       <rect>
        <x>280</x>
-       <y>220</y>
+       <y>260</y>
        <width>151</width>
        <height>41</height>
       </rect>
@@ -516,7 +732,205 @@ QPushButton:pressed {
 }</string>
      </property>
      <property name="text">
-      <string>Расчитать</string>
+      <string>Рассчитать</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_16">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>330</y>
+       <width>171</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">
+
+	border: 1px solid white;
+	border-radius: 3px;
+	background: #a2a2a2;
+	min-width: 6em;
+	color: #ffffff;</string>
+     </property>
+     <property name="text">
+      <string>Срок кредита</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_21">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>450</y>
+       <width>171</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">
+
+	border: 1px solid white;
+	border-radius: 3px;
+	background: #a2a2a2;
+	min-width: 6em;
+	color: #ffffff;</string>
+     </property>
+     <property name="text">
+      <string>Долг + проценты</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_24">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>390</y>
+       <width>171</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">
+
+	border: 1px solid white;
+	border-radius: 3px;
+	background: #a2a2a2;
+	min-width: 6em;
+	color: #ffffff;</string>
+     </property>
+     <property name="text">
+      <string>Начисленные проценты</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_31">
+     <property name="geometry">
+      <rect>
+       <x>280</x>
+       <y>450</y>
+       <width>201</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">
+
+	border: 1px solid white;
+	border-radius: 3px;
+	background: #a2a2a2;
+	min-width: 6em;
+	color: #ffffff;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_32">
+     <property name="geometry">
+      <rect>
+       <x>280</x>
+       <y>390</y>
+       <width>201</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">
+
+	border: 1px solid white;
+	border-radius: 3px;
+	background: #a2a2a2;
+	min-width: 6em;
+	color: #ffffff;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_33">
+     <property name="geometry">
+      <rect>
+       <x>280</x>
+       <y>330</y>
+       <width>201</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">
+
+	border: 1px solid white;
+	border-radius: 3px;
+	background: #a2a2a2;
+	min-width: 6em;
+	color: #ffffff;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_43">
+     <property name="geometry">
+      <rect>
+       <x>490</x>
+       <y>390</y>
+       <width>141</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color:white
+</string>
+     </property>
+     <property name="text">
+      <string>₽</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_44">
+     <property name="geometry">
+      <rect>
+       <x>490</x>
+       <y>450</y>
+       <width>141</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color:white
+</string>
+     </property>
+     <property name="text">
+      <string>₽</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_45">
+     <property name="geometry">
+      <rect>
+       <x>490</x>
+       <y>330</y>
+       <width>141</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color:white
+</string>
+     </property>
+     <property name="text">
+      <string>мес</string>
      </property>
     </widget>
    </widget>
@@ -553,8 +967,11 @@ QPushButton:pressed {
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color:darkgray;
-color:white</string>
+      <string notr="true">	border: 1px solid white;
+	border-radius: 3px;
+	background: #a2a2a2;
+	min-width: 6em;
+	color: #ffffff;</string>
      </property>
     </widget>
     <widget class="QLabel" name="label_12">
@@ -611,8 +1028,11 @@ color:white</string>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color:darkgray;
-color:white</string>
+      <string notr="true">	border: 1px solid white;
+	border-radius: 3px;
+	background: #a2a2a2;
+	min-width: 6em;
+	color: #ffffff;</string>
      </property>
     </widget>
     <widget class="QLineEdit" name="lineEdit_11">
@@ -625,8 +1045,11 @@ color:white</string>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color:darkgray;
-color:white</string>
+      <string notr="true">	border: 1px solid white;
+	border-radius: 3px;
+	background: #a2a2a2;
+	min-width: 6em;
+	color: #ffffff;</string>
      </property>
     </widget>
     <widget class="QLabel" name="label_22">
@@ -677,7 +1100,7 @@ color:white</string>
      <property name="geometry">
       <rect>
        <x>280</x>
-       <y>220</y>
+       <y>260</y>
        <width>151</width>
        <height>41</height>
       </rect>
@@ -696,7 +1119,7 @@ QPushButton:pressed {
 }</string>
      </property>
      <property name="text">
-      <string>Расчитать</string>
+      <string>Рассчитать</string>
      </property>
     </widget>
     <widget class="QComboBox" name="comboBox_2">
@@ -751,6 +1174,204 @@ QComboBox QAbstractView{
        <string>месяцев</string>
       </property>
      </item>
+    </widget>
+    <widget class="QLabel" name="label_25">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>390</y>
+       <width>171</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">
+
+	border: 1px solid white;
+	border-radius: 3px;
+	background: #a2a2a2;
+	min-width: 6em;
+	color: #ffffff;</string>
+     </property>
+     <property name="text">
+      <string>Начисленные проценты</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_26">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>330</y>
+       <width>171</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">
+
+	border: 1px solid white;
+	border-radius: 3px;
+	background: #a2a2a2;
+	min-width: 6em;
+	color: #ffffff;</string>
+     </property>
+     <property name="text">
+      <string>Сумма кредита</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_27">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>450</y>
+       <width>171</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">
+
+	border: 1px solid white;
+	border-radius: 3px;
+	background: #a2a2a2;
+	min-width: 6em;
+	color: #ffffff;</string>
+     </property>
+     <property name="text">
+      <string>Долг + проценты</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_28">
+     <property name="geometry">
+      <rect>
+       <x>280</x>
+       <y>330</y>
+       <width>201</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">
+
+	border: 1px solid white;
+	border-radius: 3px;
+	background: #a2a2a2;
+	min-width: 6em;
+	color: #ffffff;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_29">
+     <property name="geometry">
+      <rect>
+       <x>280</x>
+       <y>390</y>
+       <width>201</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">
+
+	border: 1px solid white;
+	border-radius: 3px;
+	background: #a2a2a2;
+	min-width: 6em;
+	color: #ffffff;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_30">
+     <property name="geometry">
+      <rect>
+       <x>280</x>
+       <y>450</y>
+       <width>201</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">
+
+	border: 1px solid white;
+	border-radius: 3px;
+	background: #a2a2a2;
+	min-width: 6em;
+	color: #ffffff;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_37">
+     <property name="geometry">
+      <rect>
+       <x>490</x>
+       <y>330</y>
+       <width>141</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color:white
+</string>
+     </property>
+     <property name="text">
+      <string>₽</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_38">
+     <property name="geometry">
+      <rect>
+       <x>490</x>
+       <y>390</y>
+       <width>141</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color:white
+</string>
+     </property>
+     <property name="text">
+      <string>₽</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_39">
+     <property name="geometry">
+      <rect>
+       <x>490</x>
+       <y>450</y>
+       <width>141</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color:white
+</string>
+     </property>
+     <property name="text">
+      <string>₽</string>
+     </property>
     </widget>
    </widget>
   </widget>
