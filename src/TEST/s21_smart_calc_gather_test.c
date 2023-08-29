@@ -13,7 +13,7 @@ START_TEST(test_one) {
 END_TEST
 
 START_TEST(test_two) {
-  char answer[64] = "0.0000000"; 
+  char answer[64] = "-11711.7694905"; 
   const char math_expression[1000] = "1+2-3/4*5^6+sin3.1415927+cos(3.1415927/2)+sqrt2+2mod2+tan1+ln2+log10+asin0.3+acos0.1+atan0.6+-2+(1-+2)";
   char *result = malloc(50 * sizeof(char));
   result = execution(math_expression);
