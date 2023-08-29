@@ -5,13 +5,24 @@
 #include <QtCharts/QChartView>
 #include <QtCharts/QPieSeries>
 #include <QtCharts/QPieSlice>
+#include <QDoubleValidator>
 
 CreditCalc::CreditCalc(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::CreditCalc)
 {
     ui->setupUi(this);
-    //connect(expandCalculatorAction, &QAction::triggered, this, &CreditCalc::expandWindow);
+    ui->lineEdit->setValidator(new QDoubleValidator(0, 1000000, 7, this));
+    ui->lineEdit_2->setValidator(new QDoubleValidator(0, 10000000, 7, this));
+    ui->lineEdit_6->setValidator(new QDoubleValidator(0, 10000000, 7, this));
+
+    ui->lineEdit_8->setValidator(new QDoubleValidator(0, 1000000, 7, this));
+    ui->lineEdit_5->setValidator(new QDoubleValidator(0, 10000000, 7, this));
+    ui->lineEdit_7->setValidator(new QDoubleValidator(0, 10000000, 7, this));
+
+    ui->lineEdit_11->setValidator(new QDoubleValidator(0, 1000000, 7, this));
+    ui->lineEdit_10->setValidator(new QDoubleValidator(0, 10000000, 7, this));
+    ui->lineEdit_9->setValidator(new QDoubleValidator(0, 10000000, 7, this));
 }
 
 CreditCalc::~CreditCalc()
@@ -65,6 +76,7 @@ void CreditCalc::on_comboBox_currentIndexChanged(int index)
 void CreditCalc::on_pushButton_3_clicked()
 {
     int FLAG_ERROR = 0;
+    int FLAG_ERROR_1 = 0;
     QString sum_credit_temp = NULL;
     QString percent_pay = NULL;
     QString percent_plus_credit = NULL;
@@ -84,6 +96,11 @@ void CreditCalc::on_pushButton_3_clicked()
     interest_rate = interest_rate_str.toDouble();
     interest_rate = interest_rate / 12.0 / 100.0;
 
+    if(interest_rate < 0)
+    {
+        FLAG_ERROR_1 = 1;
+    }
+
     if(ui->comboBox_2->currentIndex() == 0)
     {
         if(deadline > 50) FLAG_ERROR = 1;
@@ -92,7 +109,7 @@ void CreditCalc::on_pushButton_3_clicked()
     else if(deadline > 600) FLAG_ERROR = 1;
 
 
-    if(FLAG_ERROR == 0)
+    if(FLAG_ERROR == 0 && FLAG_ERROR_1 == 0)
     {
         sum_credit_plus_sum_percent = pay_temp * deadline;
         while(deadline != 0)
@@ -133,12 +150,18 @@ void CreditCalc::on_pushButton_3_clicked()
         if(ui->comboBox_2->currentIndex() == 0) ui->lineEdit_11->setText("Максимум 50");
         else ui->lineEdit_11->setText("Максимум 600");
     }
+    else if(FLAG_ERROR_1 == 1)
+    {
+
+        ui->lineEdit_9->setText("Процентная ставка меньше 0");
+    }
 
 }
 
 void CreditCalc::on_pushButton_1_clicked()
 {
     int FLAG_ERROR = 0;
+    int FLAG_ERROR_1 = 0;
     double diff_pay_1 = 0;
     double diff_pay_2 = 0;
     double sum_percent = 0;
@@ -158,6 +181,11 @@ void CreditCalc::on_pushButton_1_clicked()
     interest_rate = interest_rate_str.toDouble();
     interest_rate = interest_rate / 12.0 / 100.0;
 
+    if(interest_rate < 0)
+    {
+        FLAG_ERROR_1 = 1;
+    }
+
     if(ui->comboBox_3->currentIndex() == 0)
     {
         if(deadline > 50) FLAG_ERROR = 1;
@@ -165,8 +193,9 @@ void CreditCalc::on_pushButton_1_clicked()
     }
     else if (deadline > 600) FLAG_ERROR = 1;
 
+    QPropertyAnimation *animation = new QPropertyAnimation(this, "geometry");
 
-    if(ui->radioButton->isChecked() && FLAG_ERROR == 0)
+    if(ui->radioButton->isChecked() && FLAG_ERROR == 0 && FLAG_ERROR_1 == 0)
     {
         pay = (sum_credit * interest_rate) / (1 - pow(1 + interest_rate, -deadline));
         sum_percent = pay * deadline - sum_credit;
@@ -182,8 +211,16 @@ void CreditCalc::on_pushButton_1_clicked()
         ui->label_36->setText(mounth_pay);
         ui->label_35->setText(percent_pay);
         ui->label_34->setText(percent_plus_credit);
+
+        if (height() == 350) {
+            animation->setEndValue(QRect(geometry().x(), geometry().y(), 715, 550));
+        }
+        animation->setDuration(500);
+        animation->setEasingCurve(QEasingCurve::InOutQuad);
+
+        animation->start(QAbstractAnimation::DeleteWhenStopped);
     }
-    else if(ui->radioButton_2->isChecked() && FLAG_ERROR == 0)
+    else if(ui->radioButton_2->isChecked() && FLAG_ERROR == 0 && FLAG_ERROR_1 == 0)
     {
         for (int i = 0; i <= deadline; i++)
         {
@@ -209,8 +246,6 @@ void CreditCalc::on_pushButton_1_clicked()
         ui->label_35->setText(percent_pay);
         ui->label_34->setText(percent_plus_credit);
 
-        QPropertyAnimation *animation = new QPropertyAnimation(this, "geometry");
-
         if (height() == 350) {
             animation->setEndValue(QRect(geometry().x(), geometry().y(), 715, 550));
         }
@@ -224,12 +259,17 @@ void CreditCalc::on_pushButton_1_clicked()
         if(ui->comboBox_3->currentIndex() == 0) ui->lineEdit_2->setText("Максимум 50");
         else ui->lineEdit_2->setText("Максимум 600");
     }
+    else
+    {
+        ui->lineEdit_6->setText("Процентная ставка меньше 0");
+    }
 }
 
 
 
 void CreditCalc::on_pushButton_2_clicked()
 {
+    int FLAG_ERROR_1 = 0;
 
     QString deadline_temp = NULL;
     QString sum_percent_pay = NULL;
@@ -252,11 +292,16 @@ void CreditCalc::on_pushButton_2_clicked()
     interest_rate = interest_rate_str.toDouble();
     interest_rate = interest_rate / 12.0 / 100.0;
 
+    if(interest_rate < 0)
+    {
+        FLAG_ERROR_1 = 1;
+    }
+
     int minimum_pay = (sum_credit * interest_rate) + 0.5;
     QString minimum_pay_str = QString::number(minimum_pay);
     minimum_pay_str = ERROR + minimum_pay_str;
 
-    if(sum_credit * interest_rate < pay)
+    if(sum_credit * interest_rate < pay && FLAG_ERROR_1 == 0)
     {
         while(sum_credit >= 0)
         {
@@ -288,10 +333,15 @@ void CreditCalc::on_pushButton_2_clicked()
 
         animation->start(QAbstractAnimation::DeleteWhenStopped);
     }
-    else
+    else if(sum_credit * interest_rate > pay)
     {
         ui->lineEdit_5->setText(minimum_pay_str);
     }
+    else
+    {
+        ui->lineEdit_7->setText("Процентная ставка меньше 0");
+    }
+
 
 }
 

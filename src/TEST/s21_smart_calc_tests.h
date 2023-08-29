@@ -31,6 +31,5 @@ Suite *suite_smart_calc_parsing_str(void);
 
 void run_tests(void);
 void run_testcase(Suite *testcase);
-double get_rand(double min, double max);
 
 #endif  // SRC_UNIT_TESTS_S21_SMART_CALC_H_

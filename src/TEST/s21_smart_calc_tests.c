@@ -23,6 +23,7 @@ void run_tests(void) {
     suite_smart_calc_unary_minus(),
     suite_smart_calc_unary_plus(),
     suite_smart_calc_gather_test(),
+    suite_smart_calc_parsing_str(),
     NULL
   };
 
@@ -32,7 +33,21 @@ void run_tests(void) {
   }
 }
 
-int main(void) {
+void run_testcase(Suite *testcase) {
+  static int counter_testcase = 1;
+
+  if (counter_testcase > 0) putchar('\n');
+  counter_testcase++;
+  SRunner *sr = srunner_create(testcase);
+
+  srunner_set_fork_status(sr, CK_NOFORK);
+  srunner_run_all(sr, CK_NORMAL);
+
+  srunner_free(sr);
+}
+
+int main()
+{
   run_tests();
   return 0;
 }
