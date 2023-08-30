@@ -23,7 +23,7 @@ endif
 ${TESTS}%.o: ${TESTS}%.c
 	${CC} -c ${FLAGS} $@ $< 
 
-all: ${CLEAN} ${TARGET} ${GCOV} dvi
+all: ${CLEAN} install ${TARGET} ${GCOV} dvi dist
 
 ${TARGET} : $(SRCS) ${SRCS_TEST}
 	${CC} ${FLAGS} -o TESTS ${SRCS} ${SRCS_TEST} ${TEST_FLAGS} 
@@ -35,8 +35,10 @@ install:
 	cd Build_Calc&&cmake ../
 	cd Build_Calc&&make
 
+uninstall:
+	rm -rf Build_Calc
 
-dist: install
+dist: |install
 	tar --totals -cvf smart_calc.tar .
 
 ${GCOV}: build_file
@@ -54,4 +56,4 @@ build_file:
 	mkdir Build_test
 
 $(CLEAN) :
-	rm -rf html latex Build_Calc TESTS *.a *.o $(TESTS).*o *.out app *.info html_report TEST/*.o *.gcno *.gcda 
+	rm -rf html latex Build_Calc Build_test TESTS *.a *.o $(TESTS).*o *.out app *.tar *.info html_report TEST/*.o *.gcno *.gcda 

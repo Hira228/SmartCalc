@@ -28,7 +28,6 @@ Suite *suite_smart_calc_gather_test(void);
 
 Suite *suite_smart_calc_parsing_str(void);
 
-
 void run_tests(void);
 void run_testcase(Suite *testcase);
 
